@@ -3,7 +3,7 @@ package me.ezerror.mutilThreading.D0.Ch02;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j(topic = "ch05")
-public class Ch05_TestWaitNotify {
+public class Ch06_TestWaitNotify {
     final static Object obj = new Object();
 
     public static void main(String[] args) throws InterruptedException {
