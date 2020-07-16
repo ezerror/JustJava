@@ -1,4 +1,4 @@
-package me.ezerror.mutilThreading.D0.Ch01;
+package me.ezerror.mutilthreading.D0.Ch01;
 
 
 

@@ -1,4 +1,4 @@
-package me.ezerror.mutilThreading;
+package me.ezerror.mutilthreading;
 
 import org.openjdk.jol.info.ClassLayout;
 

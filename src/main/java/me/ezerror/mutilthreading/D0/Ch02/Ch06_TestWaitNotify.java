@@ -1,4 +1,4 @@
-package me.ezerror.mutilThreading.D0.Ch02;
+package me.ezerror.mutilthreading.D0.Ch02;
 
 import lombok.extern.slf4j.Slf4j;
 

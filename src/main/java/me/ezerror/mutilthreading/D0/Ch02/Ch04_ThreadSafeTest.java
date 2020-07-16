@@ -1,4 +1,4 @@
-package me.ezerror.mutilThreading.D0.Ch02;
+package me.ezerror.mutilthreading.D0.Ch02;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,6 @@
-package me.ezerror.mutilThreading.D0.Ch02;
+package me.ezerror.mutilthreading.D0.Ch02;
 
 import lombok.extern.slf4j.Slf4j;
-import sun.rmi.runtime.Log;
 
 import java.util.Hashtable;
 
