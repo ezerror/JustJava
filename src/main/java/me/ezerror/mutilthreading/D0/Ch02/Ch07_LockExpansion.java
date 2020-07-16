@@ -1,10 +1,7 @@
 package me.ezerror.mutilthreading.D0.Ch02;
 
 import lombok.extern.slf4j.Slf4j;
-import me.ezerror.util.SimpleClassLayout;
-import org.openjdk.jol.info.ClassLayout;
-
-import java.util.concurrent.TimeUnit;
+import me.ezerror.util.simpleclasslayout.SimpleClassLayout;
 
 @Slf4j(topic = "ch07")
 /*

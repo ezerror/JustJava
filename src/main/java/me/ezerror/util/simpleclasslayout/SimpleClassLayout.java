@@ -1,11 +1,7 @@
-package me.ezerror.util;
+package me.ezerror.util.simpleclasslayout;
 
-import jdk.nashorn.internal.objects.Global;
 import org.openjdk.jol.info.ClassData;
-import org.openjdk.jol.info.ClassLayout;
 import org.openjdk.jol.info.FieldLayout;
-import org.openjdk.jol.layouters.CurrentLayouter;
-import org.openjdk.jol.layouters.Layouter;
 import org.openjdk.jol.vm.VM;
 import org.openjdk.jol.vm.VirtualMachine;
 
@@ -13,6 +9,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.SortedSet;
 
+/**
+ * a simple class layout.
+ *
+ * @author ez
+ */
 public class SimpleClassLayout {
     private final ClassData classData;
     private final SortedSet<FieldLayout> fields;
@@ -106,6 +107,7 @@ public class SimpleClassLayout {
 
     /**
      * 获取锁状态
+     *
      * @param lockSign
      * @return
      */

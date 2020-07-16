@@ -1,10 +1,8 @@
-package me.ezerror.util;
+package me.ezerror.util.simpleclasslayout;
 
 import org.openjdk.jol.info.ClassData;
-import org.openjdk.jol.info.ClassLayout;
 import org.openjdk.jol.info.FieldData;
 import org.openjdk.jol.info.FieldLayout;
-import org.openjdk.jol.layouters.Layouter;
 import org.openjdk.jol.util.MathUtil;
 import org.openjdk.jol.vm.VM;
 import org.openjdk.jol.vm.VirtualMachine;
@@ -14,9 +12,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The layouter getting the actual VM layout.
+ * getting the actual VM layout
  *
- * @author Aleksey Shipilev
+ * @author ez
  */
 public class SimpleLayouter {
 
