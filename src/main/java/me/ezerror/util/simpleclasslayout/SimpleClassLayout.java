@@ -49,7 +49,11 @@ public class SimpleClassLayout {
     }
 
     public String toPrintSimple() {
-        return toPrintSimple(classData.instance());
+        return toPrintSimple(classData.instance(), true);
+    }
+
+    public String toPrintSimple(Boolean isMoreInfo) {
+        return toPrintSimple(classData.instance(), isMoreInfo);
     }
 
     /**
@@ -61,7 +65,7 @@ public class SimpleClassLayout {
         return fields;
     }
 
-    public String toPrintSimple(Object instance) {
+    public String toPrintSimple(Object instance, Boolean isMoreInf) {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         String MSG_GAP = "(alignment/padding gap)";
@@ -79,7 +83,9 @@ public class SimpleClassLayout {
         maxDescrLen += 2;
         if (instance != null) {
             VirtualMachine vm = VM.current();
-            pw.print("64位Mark Word信息: ");
+            if (isMoreInf) {
+                pw.print("\n64位Mark Word信息: ");
+            }
             String lockSign = "";
             for (long off = 4; off >= 0; off -= 4) {
                 int word = vm.getInt(instance, off);
@@ -93,9 +99,11 @@ public class SimpleClassLayout {
                     lockSign = last8.substring(last8.length() - 3);
                 }
             }
-            pw.print("\n锁标识位为: " + lockSign);
-            String lockName = getLockName(lockSign);
-            pw.print("\n锁状态为: " + lockName);
+            if (isMoreInf) {
+                pw.print("\n锁标识位为: " + lockSign);
+                String lockName = getLockName(lockSign);
+                pw.print("\n锁状态为: " + lockName);
+            }
         }
         else {
             pw.printf(" %6d %5d %" + maxTypeLen + "s %-" + maxDescrLen + "s %s%n", 0, headerSize(), "", "(object header)", "N/A");
