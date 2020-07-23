@@ -10,9 +10,7 @@ public class Test_ProducerAndConsumer {
         MessageQueue queue = new MessageQueue(3);
         for (int i = 0; i < 5; i++) {
             int finalI = i;
-            new Thread(() -> {
-                queue.put("内容" + finalI);
-            }, "producer" + i).start();
+            new Thread(() -> queue.put("内容" + finalI), "producer" + i).start();
         }
         for (int j = 0; j < 5; j++) {
             int finalJ = j;
