@@ -40,14 +40,14 @@ public class SqlBuilder {
 
     public String toCompleteSql() {
         StringBuilder sql = new StringBuilder();
-        sql.append(" select ").append(this.select);
+        sql.append("select ").append(this.select);
         sql.append(" from ").append(this.tableName);
         return sql.toString();
     }
 
     public String toCountSql() {
         StringBuilder sql = new StringBuilder();
-        sql.append(" select ").append("count(").append(countField).append(")");
+        sql.append("select ").append("count(").append(countField).append(")");
         sql.append(" from ").append(this.tableName);
         return sql.toString();
     }
