@@ -1,23 +1,27 @@
 package me.ezerror.util.sqlbuilder;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import me.ezerror.util.sqlbuilder.SqlCondition.condition;
+
+import java.util.*;
 
 public class SqlBuilder {
     private final String tableName;
-    private final String[] id;
+    private String[] id;
     private String selectField = "*";
-    private final String countField;
+    private String countField;
     private List<Join> joinList;
     private String limit = "";
-
+    private LinkedHashMap<String, SqlCondition> conditionMap = new LinkedHashMap<>();
 
     public SqlBuilder(Class<TestObj> entity) {
         Entity annotation = entity.getAnnotation(Entity.class);
         this.tableName = annotation.table();
         this.id = annotation.id();
         countField = this.id.length > 0 ? this.id[0] : "1";
+    }
+
+    public SqlBuilder(String tableName) {
+        this.tableName = tableName;
     }
 
     public SqlBuilder select(String selectField) {
@@ -37,6 +41,26 @@ public class SqlBuilder {
                 sql.append("on").append(join.columnA).append("=").append(join.columnB);
             }
         }
+        if (conditionMap.size() > 0) {
+            SqlGenerator patchSql = new SqlGenerator();
+            patchSql.append("where 1=1");
+            for (Map.Entry<String, SqlCondition> map : conditionMap.entrySet()) {
+                SqlCondition sqlCondition = map.getValue();
+                List<condition> conditionList = sqlCondition.getConditionList();
+                for (int i = 0; i < conditionList.size(); i++) {
+                    if (i == 0) {
+                        patchSql.append(map.getKey()).append("( 1=1");
+                    }
+                    patchSql.append(conditionList.get(i).getPatchSql());
+                    if (i == conditionList.size() - 1) {
+                        patchSql.append(")");
+                    }
+                }
+            }
+            sql.append(patchSql.toString());
+        }
+
+
         sql.append(limit);
         return sql.toString();
     }
@@ -48,16 +72,19 @@ public class SqlBuilder {
         return sql.toString();
     }
 
-    public void setInnerJoin(String joinTable, String columnA, String columnB) {
+    public SqlBuilder setInnerJoin(String joinTable, String columnA, String columnB) {
         setJoin(joinTable, columnA, columnB, "inner join");
+        return this;
     }
 
-    public void setLeftJoin(String joinTable, String columnA, String columnB) {
+    public SqlBuilder setLeftJoin(String joinTable, String columnA, String columnB) {
         setJoin(joinTable, columnA, columnB, "left join");
+        return this;
     }
 
-    public void setRightJoin(String joinTable, String columnA, String columnB) {
+    public SqlBuilder setRightJoin(String joinTable, String columnA, String columnB) {
         setJoin(joinTable, columnA, columnB, "right join");
+        return this;
     }
 
     private void setJoin(String joinTable, String columnA, String columnB, String joinMode) {
@@ -73,6 +100,14 @@ public class SqlBuilder {
 
     public void limit(int first, int limitNum) {
         this.limit = "limit " + first + "," + limitNum;
+    }
+
+    public void setCondition(SqlCondition sqlCondition) {
+        conditionMap.put("and", sqlCondition);
+    }
+
+    public void setOrCondition(SqlCondition sqlCondition) {
+        conditionMap.put("or", sqlCondition);
     }
 
     private static class SqlGenerator {

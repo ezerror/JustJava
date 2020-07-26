@@ -6,11 +6,9 @@ import java.util.Date;
 
 public class test {
     public static void main(String[] args) {
-        SqlBuilder builder = new SqlBuilder(TestObj.class);
-        builder.select("rowguid");
-        builder.setInnerJoin("tableb b","a.rowguid","b.rowguid");
-        builder.setLeftJoin("tableb c","a.rowguid","c.rowguid");
-        builder.setRightJoin("tableb d","a.rowguid","d.rowguid");
+        SqlBuilder builder = new SqlBuilder("aduit_project");
+        builder.setInnerJoin("audit_task b", "a.taskguid","b.rowguid");
+        builder.setCondition(new SqlCondition().eq("taskname", "一个事项").eq("taskguid", "1237","or"));
         System.out.println(builder.toCompleteSql());
     }
 }
