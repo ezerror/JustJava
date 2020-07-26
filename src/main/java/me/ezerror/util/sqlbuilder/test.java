@@ -6,12 +6,11 @@ import java.util.Date;
 
 public class test {
     public static void main(String[] args) {
-        String s = new SqlBuilder.Builder(TestObj.class).select("rowguid").build().toCompleteSql();
-        String countSql = new SqlBuilder.Builder(TestObj.class).build().toCountSql();
-
-        System.out.println(DateUtil.parseDateToString(new Date()));
-
-
-        System.out.println(s);
+        SqlBuilder builder = new SqlBuilder(TestObj.class);
+        builder.select("rowguid");
+        builder.setInnerJoin("tableb b","a.rowguid","b.rowguid");
+        builder.setLeftJoin("tableb c","a.rowguid","c.rowguid");
+        builder.setRightJoin("tableb d","a.rowguid","d.rowguid");
+        System.out.println(builder.toCompleteSql());
     }
 }

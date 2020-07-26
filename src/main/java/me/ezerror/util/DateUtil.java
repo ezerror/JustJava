@@ -101,7 +101,7 @@ public class DateUtil {
             return timeList;
         }
         else {
-            return parseDateToString(date, formatModes.length == 1 ? formatModes[0] : null);
+            return parseDateToString(date, formatModes.length == 1 ? formatModes[0] : DATE_FORMAT);
         }
     }
 
@@ -110,7 +110,7 @@ public class DateUtil {
             return "";
         }
         else {
-            SimpleDateFormat formatter = null;
+            SimpleDateFormat formatter;
             try {
                 formatter = new SimpleDateFormat(format);
                 return formatter.format(date);
