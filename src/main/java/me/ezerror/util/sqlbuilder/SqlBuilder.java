@@ -11,7 +11,10 @@ public class SqlBuilder {
     private String countField;
     private List<Join> joinList;
     private String limit = "";
-    private LinkedHashMap<String, SqlCondition> conditionMap = new LinkedHashMap<>();
+    private final LinkedHashMap<SqlBuilder, String> unionMap = new LinkedHashMap<>();
+    private final LinkedHashMap<String, SqlCondition> conditionMap = new LinkedHashMap<>();
+    private final LinkedHashMap<String, String> sortMap = new LinkedHashMap<>();
+    private final LinkedList<String> groupByList = new LinkedList<>();
 
     public SqlBuilder(Class<TestObj> entity) {
         Entity annotation = entity.getAnnotation(Entity.class);
@@ -57,11 +60,46 @@ public class SqlBuilder {
                     }
                 }
             }
-            sql.append(patchSql.toString());
+            sql.appendNonBlank(patchSql.toString());
         }
 
-
+        // 分组
+        SqlGenerator groupBySql = new SqlGenerator();
+        if (!groupByList.isEmpty()) {
+            groupBySql.append("group by");
+            for (int i = 0; i < groupByList.size(); i++) {
+                groupBySql.append(groupByList.get(i));
+                if (i != groupByList.size() - 1) {
+                    groupBySql.append(",");
+                }
+            }
+        }
+        sql.appendNonBlank(groupBySql.toString());
+        // 排序
+        SqlGenerator sortSql = new SqlGenerator();
+        Iterator<Map.Entry<String, String>> sortMapIter = sortMap.entrySet().iterator();
+        boolean isFirst = true;
+        while (sortMapIter.hasNext()) {
+            Map.Entry<String, String> sort = sortMapIter.next();
+            if (isFirst) {
+                sortSql.append("order by");
+                isFirst = false;
+            }
+            if (sortMapIter.hasNext()) {
+                sortSql.append(sort.getKey()).appendNonBlank(sort.getValue()).appendNonBlank(",");
+            }
+            else {
+                sortSql.append(sort.getKey()).append(sort.getValue());
+            }
+        }
+        sql.appendNonBlank(sortSql.toString());
         sql.append(limit);
+        for (Map.Entry<SqlBuilder, String> unionBuilder : unionMap.entrySet()) {
+            sql.appendLn("");
+            sql.append("UNION").append(unionBuilder.getValue()).appendNonBlank("(");
+            sql.appendNonBlank(unionBuilder.getKey().toCompleteSql());
+            sql.appendNonBlank(")");
+        }
         return sql.toString();
     }
 
@@ -110,11 +148,49 @@ public class SqlBuilder {
         conditionMap.put("or", sqlCondition);
     }
 
+    public void setUnion(SqlBuilder builder) {
+        unionMap.put(builder, "");
+    }
+
+    public void setUnion(SqlBuilder builder, String mode) {
+        unionMap.put(builder, mode);
+    }
+
+    public void orderBy(String sortField, String sortOrder) {
+        sortMap.put(sortField, sortOrder);
+    }
+
+    public void orderBy(String sortField) {
+        orderBy(sortField, "");
+
+    }
+
+    public void groupBy(String column) {
+        groupByList.add(column);
+    }
+
+
     private static class SqlGenerator {
         StringBuilder sql = new StringBuilder();
 
         private SqlGenerator append(String s) {
+            if ("".equals(s)) {
+                return this;
+            }
             this.sql.append(s).append(" ");
+            return this;
+        }
+
+        private SqlGenerator appendLn(String s) {
+            this.sql.append(s).append("\n");
+            return this;
+        }
+
+        private SqlGenerator appendNonBlank(String s) {
+            if ("".equals(s)) {
+                return this;
+            }
+            this.sql.append(s);
             return this;
         }
 
