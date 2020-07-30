@@ -31,19 +31,7 @@ public class SimpleClassLayout {
         return parseInstance(instance, new SimpleLayouter());
     }
 
-    /**
-     * Produce the class layout for the given instance, and given layouter.
-     * <p>
-     * These methods, along with {@link #parseInstance(Object)} are recommended
-     * for use when the shape of the object is not known in advance. For example,
-     * variable-sized instances (e.g. Java arrays) would not be parsed by
-     * properly, because their lengths are encoded in
-     * the instance objects, not in classes.
-     *
-     * @param instance instance to work on
-     * @param layouter class layouter
-     * @return class layout
-     */
+
     public static SimpleClassLayout parseInstance(Object instance, SimpleLayouter layouter) {
         return layouter.layout(ClassData.parseInstance(instance));
     }
@@ -56,11 +44,7 @@ public class SimpleClassLayout {
         return toPrintSimple(classData.instance(), isMoreInfo);
     }
 
-    /**
-     * Answer the set of fields, including those in superclasses
-     *
-     * @return sorted set of fields
-     */
+
     public SortedSet<FieldLayout> fields() {
         return fields;
     }
