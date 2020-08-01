@@ -7,8 +7,10 @@ import me.ezerror.mutilthreading.D3.i.IAccount;
  */
 public class Ch01_NormalAccountTest {
     public static void main(String[] args) {
-        IAccount account = new NormalAccount(10000);
-        IAccount.demo(account);
+        for (int i = 0; i < 100; i++) {
+            IAccount account = new NormalAccount(10000);
+            IAccount.demo(account);
+        }
     }
 }
 

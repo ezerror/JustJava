@@ -19,7 +19,9 @@ public interface IAccount {
         long start = System.nanoTime();
         for (int i = 0; i < 1000; i++) {
             ts.add(new Thread(() -> {
-                account.withdraw(10);
+                for (int j = 0; j < 10; j++) {
+                    account.withdraw(1);
+                }
             }));
         }
         ts.forEach(Thread::start);

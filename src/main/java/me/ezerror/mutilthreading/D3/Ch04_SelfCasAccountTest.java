@@ -1,34 +1,33 @@
 package me.ezerror.mutilthreading.D3;
 
 import me.ezerror.mutilthreading.D3.i.IAccount;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * 不安全的，会出现不正确的结果
- */
-public class Ch03_CasAccountTest {
+public class Ch04_SelfCasAccountTest {
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
-            IAccount account = new CasAccount(10000);
+            IAccount account = new SelfCasAccount(10000);
             IAccount.demo(account);
         }
     }
 }
 
-class CasAccount implements IAccount {
-    private final AtomicInteger balance = new AtomicInteger();
 
-    CasAccount(Integer balance) {
-        this.balance.set(balance);
+class SelfCasAccount implements IAccount {
+    private final AtomicData balance;
+
+    SelfCasAccount(Integer balance) {
+        this.balance = new AtomicData(balance);
     }
 
     @Override
     public Integer getBalance() {
-        return this.balance.get();
+        return this.balance.getData();
     }
 
     @Override
     public void withdraw(Integer amount) {
-        balance.getAndAdd(-amount);
+        balance.decrease(amount);
     }
 }
