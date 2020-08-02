@@ -1,5 +1,10 @@
 package me.ezerror.algorithms.Ch01;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class Sector1_1 {
     public static void main(String[] args) {
         // 1.1.1
@@ -44,13 +49,14 @@ public class Sector1_1 {
         //1.19
         System.out.println(ln(5));
         // 1.1.24
-        System.out.println(euclid(72,36));
+        System.out.println(euclid(72, 36));
         // 1.1.25
         /**
          * 需证:
          * gcd(p,q) = gcd(q,p%q);
          * gcd(q,p%q) = gcd(p%q,q%(p%q))
          */
+        sides(10000000);
     }
 
     public static String exR1(int n) {
@@ -73,9 +79,54 @@ public class Sector1_1 {
 
     }
 
-    public static int euclid(int max,int min){
-        System.out.println(max +"---"+min);
-        if(min == 0) return max;
-        return euclid(min,max%min);
+    public static int euclid(int max, int min) {
+        System.out.println(max + "---" + min);
+        if (min == 0) return max;
+        return euclid(min, max % min);
+    }
+
+
+    public static void sides(int n) {
+        int sides = 6;
+        double[] dist = new double[sides * 2 + 1];
+        for (int i = 1; i <= sides; i++) {
+            for (int j = 1; j <= sides; j++) {
+                dist[i + j] += 1.0;
+            }
+        }
+
+        for (int k = 2; k <= 2 * sides; k++) {
+            dist[k] /= 36.0;
+        }
+
+
+        int faces = 6;
+        Random r = new Random();
+        double[] dist2 = new double[13];
+        List<Thread> threads =new ArrayList<>();
+        for (int m = 0; m < 10; m++) {
+            threads.add(new Thread(() -> {
+                for (int i = 0; i < (n / 10); i++) {
+                    int i1 = r.nextInt(faces) + 1;
+                    int i2 = r.nextInt(faces) + 1;
+                    dist2[i1 + i2] += 1.0;
+                }
+            }));
+        }
+        threads.forEach((a)->a.start());
+        threads.forEach((a)-> {
+            try {
+                a.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        for (int k = 2; k <= 12; k++) {
+            dist2[k] /= n;
+        }
+        System.out.println(Arrays.toString(dist));
+        System.out.println(Arrays.toString(dist2));
+
     }
 }
