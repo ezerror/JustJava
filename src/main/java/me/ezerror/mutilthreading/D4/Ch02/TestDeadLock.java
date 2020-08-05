@@ -21,6 +21,42 @@ public class TestDeadLock {
     }
 
     public static void main(String[] args) {
+        test2();
+    }
+
+    private static void test2() {
+        ExecutorService waiterPool = Executors.newFixedThreadPool(1);
+        ExecutorService cookPool = Executors.newFixedThreadPool(1);
+
+        waiterPool.execute(() -> {
+            log.debug("处理点餐...");
+            Future<String> f = cookPool.submit(() -> {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+        waiterPool.execute(() -> {
+            log.debug("处理点餐...");
+            Future<String> f = cookPool.submit(() -> {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void test1() {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
         executorService.execute(() -> {
