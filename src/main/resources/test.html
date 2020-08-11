@@ -12,852 +12,4604 @@
 <body>
 <h2>NiCad6 Clone Report</h2>
 <table>
-    <tr style="font-size:14pt">
-        <td><b>System 1:</b> &nbsp; source</td>
-        <td><b>System 2:</b> &nbsp; target</td>
-        <td><b>Clone pairs:</b> &nbsp; 5443</td>
-        <td><b>Clone classes:</b> &nbsp; 88</td>
-    </tr>
-    <tr style="font-size:12pt">
-        <td style="background-color:white">Clone type: &nbsp; 3-2</td>
-        <td style="background-color:white">Granularity: &nbsp; functions-blind</td>
-        <td style="background-color:white">Max diff threshold: &nbsp; 30%</td>
-        <td style="background-color:white">Clone size: &nbsp; 10 - 2500 lines</td>
-        <td style="background-color:white">Total functions-blind: &nbsp; 16972</td>
-    </tr>
+<tr style="font-size:14pt">
+<td><b>System 1:</b> &nbsp; source</td>
+<td><b>System 2:</b> &nbsp; target</td>
+<td><b>Clone pairs:</b> &nbsp; 100</td>
+<td><b>Clone classes:</b> &nbsp; 56</td>
+</tr>
+<tr style="font-size:12pt">
+<td style="background-color:white">Clone type: &nbsp; 3-2</td>
+<td style="background-color:white">Granularity: &nbsp; functions-blind</td>
+<td style="background-color:white">Max diff threshold: &nbsp; 30%</td>
+<td style="background-color:white">Clone size: &nbsp; 10 - 2500 lines</td>
+<td style="background-color:white">Total functions-blind: &nbsp; 442</td>
+</tr>
 </table>
 <br>
 <table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
-    <tr><td style="background-color:white">
-        <p style="font-size:14pt"><b>Class 1:</b> &nbsp; 3 fragments, nominal size 17 lines, similarity 80%</p>
-        <table cellpadding=4 border=2>
-            <tr>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag22')" href="javascript:;">
-                        source/src/main/java/ZFCGPrint/DoPDFPrint.java: 100-122
-                    </a>
-                    <div class="mid" id="frag22" style="display:none"><pre>
-    public String DrawCode(String code) {
-        BarcodeQRCode barcode = new BarcodeQRCode(code, 400, 400, null);
-        java.awt.Image pdfImg = barcode.createAwtImage(Color.black, Color.white);
-        BufferedImage img = new BufferedImage(pdfImg.getWidth(null), pdfImg.getHeight(null),
-                BufferedImage.TYPE_INT_RGB);
-        Graphics g = img.createGraphics();
-        g.drawImage(pdfImg, 0, 0, Color.WHITE, null);
-        g.dispose();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // 创建ImageOutputStream流
-        ImageOutputStream imageOutputStream;
-        try {
-            imageOutputStream = ImageIO.createImageOutputStream(baos);
-            // 将二进制数据写进ByteArrayOutputStream
-            ImageIO.write(img, "PNG", imageOutputStream);
-            // ImageIO.write(img, "PNG", new File("D://33333.png"));
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 1:</b> &nbsp; 3 fragments, nominal size 24 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag1')" href="javascript:;">
+source/src/main/java/me/ezerror/algorithms/Ch01/S2.java: 9-60
+</a>
+<div class="mid" id="frag1" style="display:none"><pre>
+    public static void main(String[] args) {
+        // 1.1.1
+        System.out.println((0 + 15) / 2);
+        System.out.println(2.0e-6 * 100000000.1);
+        System.out.println(true &amp;&amp; false || true &amp;&amp; false);
+        // 1.1.2
+        System.out.println((1 + 2.236) / 2);
+        System.out.println(1 + 2 + 3 + 4.0);
+        System.out.println(4.1 &gt;= 4);
+        System.out.println(1 + 2 + "3");
+        // 1.1.3 too simple
+        // 1.1.4 not suitable
+        // 1.1.5
+        double x, y;
+        if ((x = 0.5) &lt; 1 &amp;&amp; x &gt; 0 &amp;&amp; (y = 0.6) &lt; 1 &amp;&amp; y &gt; 0) System.out.println(true);
+        else System.out.println(false);
+        // 1.1.6
+        /**     0 1 1 2 3 5 8 13 21 34 55 89
+         *  f:0 1 1 2 3 5 8
+         *  g:1 0 1 1 2 3 5
+         */
+        int f = 0, g = 1;
+        for (int i = 0; i &lt;= 15; i++) {
+            System.out.println(f += g);
+            g = f - g;
         }
-        catch (IOException e) {
+
+        // 1.1.16
+        /**
+         *  311361142246
+         */
+        System.out.println(exR1(6));
+        // 1.1.18
+        /**
+         * 2  4 8 16 32 64
+         * 25 12 6 3 1 0
+         *          0+32+16+2 = 50
+         */
+        System.out.println(mystery(2, 25));
+        System.out.println(mystery(3, 11));
+        //1.19
+        System.out.println(ln(5));
+        // 1.1.24
+        System.out.println(euclid(72, 36));
+        // 1.1.25
+        /**
+         * 需证:
+         * gcd(p,q) = gcd(q,p%q);
+         * gcd(q,p%q) = gcd(p%q,q%(p%q))
+         */
+        sides(10000000);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag225')" href="javascript:;">
+target/src/main/java/me/ezerror/algorithms/Ch01/Sector1_1.java: 9-60
+</a>
+<div class="mid" id="frag225" style="display:none"><pre>
+    public static void main(String[] args) {
+        // 1.1.1
+        System.out.println((0 + 15) / 2);
+        System.out.println(2.0e-6 * 100000000.1);
+        System.out.println(true &amp;&amp; false || true &amp;&amp; false);
+        // 1.1.2
+        System.out.println((1 + 2.236) / 2);
+        System.out.println(1 + 2 + 3 + 4.0);
+        System.out.println(4.1 &gt;= 4);
+        System.out.println(1 + 2 + "3");
+        // 1.1.3 too simple
+        // 1.1.4 not suitable
+        // 1.1.5
+        double x, y;
+        if ((x = 0.5) &lt; 1 &amp;&amp; x &gt; 0 &amp;&amp; (y = 0.6) &lt; 1 &amp;&amp; y &gt; 0) System.out.println(true);
+        else System.out.println(false);
+        // 1.1.6
+        /**     0 1 1 2 3 5 8 13 21 34 55 89
+         *  f:0 1 1 2 3 5 8
+         *  g:1 0 1 1 2 3 5
+         */
+        int f = 0, g = 1;
+        for (int i = 0; i &lt;= 15; i++) {
+            System.out.println(f += g);
+            g = f - g;
+        }
+
+        // 1.1.16
+        /**
+         *  311361142246
+         */
+        System.out.println(exR1(6));
+        // 1.1.18
+        /**
+         * 2  4 8 16 32 64
+         * 25 12 6 3 1 0
+         *          0+32+16+2 = 50
+         */
+        System.out.println(mystery(2, 25));
+        System.out.println(mystery(3, 11));
+        //1.19
+        System.out.println(ln(5));
+        // 1.1.24
+        System.out.println(euclid(72, 36));
+        // 1.1.25
+        /**
+         * 需证:
+         * gcd(p,q) = gcd(q,p%q);
+         * gcd(q,p%q) = gcd(p%q,q%(p%q))
+         */
+        sides(10000000);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag7')" href="javascript:;">
+source/src/main/java/me/ezerror/algorithms/Ch01/Sector1_1.java: 9-60
+</a>
+<div class="mid" id="frag7" style="display:none"><pre>
+    public static void main(String[] args) {
+        // 1.1.1
+        System.out.println((0 + 15) / 2);
+        System.out.println(2.0e-6 * 100000000.1);
+        System.out.println(true &amp;&amp; false || true &amp;&amp; false);
+        // 1.1.2
+        System.out.println((1 + 2.236) / 2);
+        System.out.println(1 + 2 + 3 + 4.0);
+        System.out.println(4.1 &gt;= 4);
+        System.out.println(1 + 2 + "3");
+        // 1.1.3 too simple
+        // 1.1.4 not suitable
+        // 1.1.5
+        double x, y;
+        if ((x = 0.5) &lt; 1 &amp;&amp; x &gt; 0 &amp;&amp; (y = 0.6) &lt; 1 &amp;&amp; y &gt; 0) System.out.println(true);
+        else System.out.println(false);
+        // 1.1.6
+        /**     0 1 1 2 3 5 8 13 21 34 55 89
+         *  f:0 1 1 2 3 5 8
+         *  g:1 0 1 1 2 3 5
+         */
+        int f = 0, g = 1;
+        for (int i = 0; i &lt;= 15; i++) {
+            System.out.println(f += g);
+            g = f - g;
+        }
+
+        // 1.1.16
+        /**
+         *  311361142246
+         */
+        System.out.println(exR1(6));
+        // 1.1.18
+        /**
+         * 2  4 8 16 32 64
+         * 25 12 6 3 1 0
+         *          0+32+16+2 = 50
+         */
+        System.out.println(mystery(2, 25));
+        System.out.println(mystery(3, 11));
+        //1.19
+        System.out.println(ln(5));
+        // 1.1.24
+        System.out.println(euclid(72, 36));
+        // 1.1.25
+        /**
+         * 需证:
+         * gcd(p,q) = gcd(q,p%q);
+         * gcd(q,p%q) = gcd(p%q,q%(p%q))
+         */
+        sides(10000000);
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 2:</b> &nbsp; 3 fragments, nominal size 44 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag6')" href="javascript:;">
+source/src/main/java/me/ezerror/algorithms/Ch01/S2.java: 89-131
+</a>
+<div class="mid" id="frag6" style="display:none"><pre>
+    public static void sides(int n) {
+        int sides = 6;
+        double[] dist = new double[sides * 2 + 1];
+        for (int i = 1; i &lt;= sides; i++) {
+            for (int j = 1; j &lt;= sides; j++) {
+                dist[i + j] += 1.0;
+            }
+        }
+
+        for (int k = 2; k &lt;= 2 * sides; k++) {
+            dist[k] /= 36.0;
+        }
+
+
+        int faces = 6;
+        Random r = new Random();
+        double[] dist2 = new double[13];
+        List&lt;Thread&gt; threads =new ArrayList&lt;&gt;();
+        for (int m = 0; m &lt; 10; m++) {
+            threads.add(new Thread(() -&gt; {
+                for (int i = 0; i &lt; (n / 10); i++) {
+                    int i1 = r.nextInt(faces) + 1;
+                    int i2 = r.nextInt(faces) + 1;
+                    dist2[i1 + i2] += 1.0;
+                }
+            }));
+        }
+        threads.forEach((a)-&gt;a.start());
+        threads.forEach((a)-&gt; {
+            try {
+                a.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        for (int k = 2; k &lt;= 12; k++) {
+            dist2[k] /= n;
+        }
+        System.out.println(Arrays.toString(dist));
+        System.out.println(Arrays.toString(dist2));
+
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag230')" href="javascript:;">
+target/src/main/java/me/ezerror/algorithms/Ch01/Sector1_1.java: 89-131
+</a>
+<div class="mid" id="frag230" style="display:none"><pre>
+    public static void sides(int n) {
+        int sides = 6;
+        double[] dist = new double[sides * 2 + 1];
+        for (int i = 1; i &lt;= sides; i++) {
+            for (int j = 1; j &lt;= sides; j++) {
+                dist[i + j] += 1.0;
+            }
+        }
+
+        for (int k = 2; k &lt;= 2 * sides; k++) {
+            dist[k] /= 36.0;
+        }
+
+
+        int faces = 6;
+        Random r = new Random();
+        double[] dist2 = new double[13];
+        List&lt;Thread&gt; threads =new ArrayList&lt;&gt;();
+        for (int m = 0; m &lt; 10; m++) {
+            threads.add(new Thread(() -&gt; {
+                for (int i = 0; i &lt; (n / 10); i++) {
+                    int i1 = r.nextInt(faces) + 1;
+                    int i2 = r.nextInt(faces) + 1;
+                    dist2[i1 + i2] += 1.0;
+                }
+            }));
+        }
+        threads.forEach((a)-&gt;a.start());
+        threads.forEach((a)-&gt; {
+            try {
+                a.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        for (int k = 2; k &lt;= 12; k++) {
+            dist2[k] /= n;
+        }
+        System.out.println(Arrays.toString(dist));
+        System.out.println(Arrays.toString(dist2));
+
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag12')" href="javascript:;">
+source/src/main/java/me/ezerror/algorithms/Ch01/Sector1_1.java: 89-131
+</a>
+<div class="mid" id="frag12" style="display:none"><pre>
+    public static void sides(int n) {
+        int sides = 6;
+        double[] dist = new double[sides * 2 + 1];
+        for (int i = 1; i &lt;= sides; i++) {
+            for (int j = 1; j &lt;= sides; j++) {
+                dist[i + j] += 1.0;
+            }
+        }
+
+        for (int k = 2; k &lt;= 2 * sides; k++) {
+            dist[k] /= 36.0;
+        }
+
+
+        int faces = 6;
+        Random r = new Random();
+        double[] dist2 = new double[13];
+        List&lt;Thread&gt; threads =new ArrayList&lt;&gt;();
+        for (int m = 0; m &lt; 10; m++) {
+            threads.add(new Thread(() -&gt; {
+                for (int i = 0; i &lt; (n / 10); i++) {
+                    int i1 = r.nextInt(faces) + 1;
+                    int i2 = r.nextInt(faces) + 1;
+                    dist2[i1 + i2] += 1.0;
+                }
+            }));
+        }
+        threads.forEach((a)-&gt;a.start());
+        threads.forEach((a)-&gt; {
+            try {
+                a.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        for (int k = 2; k &lt;= 12; k++) {
+            dist2[k] /= n;
+        }
+        System.out.println(Arrays.toString(dist));
+        System.out.println(Arrays.toString(dist2));
+
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 3:</b> &nbsp; 2 fragments, nominal size 21 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag14')" href="javascript:;">
+source/src/main/java/me/ezerror/java8/streamTest.java: 15-39
+</a>
+<div class="mid" id="frag14" style="display:none"><pre>
+    private static void testMap() {
+
+        List&lt;HashMap&lt;String,String&gt;&gt; mapList = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; 100; i++) {
+            HashMap&lt;String,String&gt; map = new HashMap&lt;&gt;();
+            map.put("key1", String.valueOf(i));
+            map.put("key2", String.valueOf(i));
+            map.put("key3", String.valueOf(i));
+            map.put("key4", String.valueOf(i));
+            mapList.add(map);
+        }
+
+        long start = System.currentTimeMillis();
+
+        List&lt;HashMap&lt;String, String&gt;&gt; collect = mapList.stream().map((map) -&gt; {
+            HashMap&lt;String, String&gt; temp = new HashMap&lt;&gt;();
+            temp.put("key1", map.get("key1"));
+            temp.put("key2", map.get("key2"));
+            return temp;
+        }).collect(Collectors.toList());
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+
+        //System.out.println(collect);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag232')" href="javascript:;">
+target/src/main/java/me/ezerror/java8/streamTest.java: 15-39
+</a>
+<div class="mid" id="frag232" style="display:none"><pre>
+    private static void testMap() {
+
+        List&lt;HashMap&lt;String,String&gt;&gt; mapList = new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; 100; i++) {
+            HashMap&lt;String,String&gt; map = new HashMap&lt;&gt;();
+            map.put("key1", String.valueOf(i));
+            map.put("key2", String.valueOf(i));
+            map.put("key3", String.valueOf(i));
+            map.put("key4", String.valueOf(i));
+            mapList.add(map);
+        }
+
+        long start = System.currentTimeMillis();
+
+        List&lt;HashMap&lt;String, String&gt;&gt; collect = mapList.stream().map((map) -&gt; {
+            HashMap&lt;String, String&gt; temp = new HashMap&lt;&gt;();
+            temp.put("key1", map.get("key1"));
+            temp.put("key2", map.get("key2"));
+            return temp;
+        }).collect(Collectors.toList());
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+
+        //System.out.println(collect);
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 4:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag19')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch01_WaysForCreatingThread.java: 18-28
+</a>
+<div class="mid" id="frag19" style="display:none"><pre>
+    private static void W3() throws ExecutionException, InterruptedException {
+        FutureTask&lt;String&gt; task = new FutureTask&lt;&gt;(() -&gt; {
+            System.out.println("FutureTask 配合 Thread");
+            Thread.sleep(2000);
+            return "FutureTask 配合 Thread";
+        });
+
+        Thread t = new Thread(task, "thread-name");
+        t.start();
+        System.out.println(task.get());
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag237')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch01_WaysForCreatingThread.java: 18-28
+</a>
+<div class="mid" id="frag237" style="display:none"><pre>
+    private static void W3() throws ExecutionException, InterruptedException {
+        FutureTask&lt;String&gt; task = new FutureTask&lt;&gt;(() -&gt; {
+            System.out.println("FutureTask 配合 Thread");
+            Thread.sleep(2000);
+            return "FutureTask 配合 Thread";
+        });
+
+        Thread t = new Thread(task, "thread-name");
+        t.start();
+        System.out.println(task.get());
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 5:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag20')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch01_WaysForCreatingThread.java: 33-41
+</a>
+<div class="mid" id="frag20" style="display:none"><pre>
+    private static void W1() {
+        Thread t = new Thread("thread-name") {
+            public void run() {
+                int a = 10;
+                System.out.println("直接使用 Thread");
+            }
+        };
+        t.start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag238')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch01_WaysForCreatingThread.java: 33-41
+</a>
+<div class="mid" id="frag238" style="display:none"><pre>
+    private static void W1() {
+        Thread t = new Thread("thread-name") {
+            public void run() {
+                int a = 10;
+                System.out.println("直接使用 Thread");
+            }
+        };
+        t.start();
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 6:</b> &nbsp; 2 fragments, nominal size 13 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag28')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch03_testThreadMethod.java: 21-34
+</a>
+<div class="mid" id="frag28" style="display:none"><pre>
+    private static void testinterrupt1() throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            try {
+                sleep(1000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, "t1");
+        t1.start();
+        sleep(500);
+        t1.interrupt();
+        log.debug(" 打断状态: {}" + t1.isInterrupted());
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag246')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch03_testThreadMethod.java: 21-34
+</a>
+<div class="mid" id="frag246" style="display:none"><pre>
+    private static void testinterrupt1() throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            try {
+                sleep(1000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }, "t1");
+        t1.start();
+        sleep(500);
+        t1.interrupt();
+        log.debug(" 打断状态: {}" + t1.isInterrupted());
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 7:</b> &nbsp; 2 fragments, nominal size 13 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag30')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch03_testThreadMethod.java: 48-62
+</a>
+<div class="mid" id="frag30" style="display:none"><pre>
+    private static void testinterruptPark() throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            log.debug("park...");
+            LockSupport.park();
+            log.debug("unpark...");
+            log.debug(" 打断状态: {}" + Thread.currentThread().isInterrupted());
+            LockSupport.park();
+            log.debug("unpark...");
+
+        }, "t1");
+
+        t1.start();
+        Thread.sleep(1000);
+        t1.interrupt();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag248')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch03_testThreadMethod.java: 48-62
+</a>
+<div class="mid" id="frag248" style="display:none"><pre>
+    private static void testinterruptPark() throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            log.debug("park...");
+            LockSupport.park();
+            log.debug("unpark...");
+            log.debug(" 打断状态: {}" + Thread.currentThread().isInterrupted());
+            LockSupport.park();
+            log.debug("unpark...");
+
+        }, "t1");
+
+        t1.start();
+        Thread.sleep(1000);
+        t1.interrupt();
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 8:</b> &nbsp; 2 fragments, nominal size 19 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag31')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch03_testThreadMethod.java: 76-96
+</a>
+<div class="mid" id="frag31" style="display:none"><pre>
+    public void start() {
+        monitor = new Thread(() -&gt; {
+            while (true) {
+                Thread current = Thread.currentThread();
+                if (current.isInterrupted()) {
+                    log.debug("处理后事！");
+                    break;
+                }
+                try {
+                    sleep(1000);
+                    log.debug("运行中");
+                }
+                catch (Exception e) {
+                    log.error(e.getMessage(), e);
+                    // 由于sleep中被打断，打断标记重置为false,重新设置打断标记
+                    current.interrupt();
+                }
+            }
+        });
+        monitor.start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag249')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch03_testThreadMethod.java: 76-96
+</a>
+<div class="mid" id="frag249" style="display:none"><pre>
+    public void start() {
+        monitor = new Thread(() -&gt; {
+            while (true) {
+                Thread current = Thread.currentThread();
+                if (current.isInterrupted()) {
+                    log.debug("处理后事！");
+                    break;
+                }
+                try {
+                    sleep(1000);
+                    log.debug("运行中");
+                }
+                catch (Exception e) {
+                    log.error(e.getMessage(), e);
+                    // 由于sleep中被打断，打断标记重置为false,重新设置打断标记
+                    current.interrupt();
+                }
+            }
+        });
+        monitor.start();
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 9:</b> &nbsp; 2 fragments, nominal size 20 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag33')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch04_DemonThread.java: 9-32
+</a>
+<div class="mid" id="frag33" style="display:none"><pre>
+    public static void main(String[] args) {
+        log.debug("开始运行...");
+        Thread t1 = new Thread(() -&gt; {
+            log.debug("开始运行...");
+            try {
+                Thread.sleep(2000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.debug("运行结束...");
+        }, "daemon");
+        // 设置该线程为守护线程
+        t1.setDaemon(true);
+        t1.start();
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // 输出数组
-        return Base64Util.encode(baos.toByteArray());
+        log.debug("运行结束...");
+
     }
 </pre></div>
-                </td>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag13339')" href="javascript:;">
-                        target/src/main/java/com/epoint/ztb/lzgonggaopdfprint/DoPDFPrint.java: 199-221
-                    </a>
-                    <div class="mid" id="frag13339" style="display:none"><pre>
-    public byte[] DrawCode(String code) {
-        BarcodeQRCode barcode = new BarcodeQRCode(code, 80, 80, null);
-        java.awt.Image pdfImg = barcode.createAwtImage(Color.black, Color.white);
-        BufferedImage img = new BufferedImage(pdfImg.getWidth(null), pdfImg.getHeight(null),
-                BufferedImage.TYPE_INT_RGB);
-        Graphics g = img.createGraphics();
-        g.drawImage(pdfImg, 0, 0, Color.WHITE, null);
-        g.dispose();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // 创建ImageOutputStream流
-        ImageOutputStream imageOutputStream;
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag251')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch01/Ch04_DemonThread.java: 9-32
+</a>
+<div class="mid" id="frag251" style="display:none"><pre>
+    public static void main(String[] args) {
+        log.debug("开始运行...");
+        Thread t1 = new Thread(() -&gt; {
+            log.debug("开始运行...");
+            try {
+                Thread.sleep(2000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.debug("运行结束...");
+        }, "daemon");
+        // 设置该线程为守护线程
+        t1.setDaemon(true);
+        t1.start();
         try {
-            imageOutputStream = ImageIO.createImageOutputStream(baos);
-            // 将二进制数据写进ByteArrayOutputStream
-            ImageIO.write(img, "PNG", imageOutputStream);
-            // ImageIO.write(img, "PNG", new File("D://33333.png"));
+            Thread.sleep(1000);
         }
-        catch (IOException e) {
+        catch (InterruptedException e) {
             e.printStackTrace();
         }
-        // 输出数组
-        return baos.toByteArray();
+        log.debug("运行结束...");
+
     }
 </pre></div>
-                </td>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag3673')" href="javascript:;">
-                        source/src/main/java/com/epoint/tdjyztbmis/purchasebook/action/BarCodeAction.java: 32-54
-                    </a>
-                    <div class="mid" id="frag3673" style="display:none"><pre>
-    public void DrawCode(String code) {
-        BarcodeQRCode barcode = new BarcodeQRCode(getRequestParameter("code"), 80, 80, null);
-        java.awt.Image pdfImg = barcode.createAwtImage(Color.black, Color.white);
-        BufferedImage img = new BufferedImage(pdfImg.getWidth(null), pdfImg.getHeight(null),
-                BufferedImage.TYPE_INT_RGB);
-        Graphics g = img.createGraphics();
-        g.drawImage(pdfImg, 0, 0, Color.WHITE, null);
-        g.dispose();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        // 创建ImageOutputStream流
-        ImageOutputStream imageOutputStream;
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 10:</b> &nbsp; 4 fragments, nominal size 21 lines, similarity 88%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag34')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch01_SharedModel.java: 12-30
+</a>
+<div class="mid" id="frag34" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5000; i++) {
+                counter++;
+            }
+        }, "t1");
+
+        Thread t2 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5000; i++) {
+                counter--;
+            }
+        }, "t2");
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        log.debug("{}", counter);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag256')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch03_Synchronized.java: 16-38
+</a>
+<div class="mid" id="frag256" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5000; i++) {
+                synchronized (lock) {
+                    counter++;
+                }
+            }
+        }, "t1");
+
+        Thread t2 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5000; i++) {
+                synchronized (lock) {
+                    counter--;
+                }
+            }
+        }, "t2");
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        log.debug("{}", counter);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag252')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch01_SharedModel.java: 12-30
+</a>
+<div class="mid" id="frag252" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5000; i++) {
+                counter++;
+            }
+        }, "t1");
+
+        Thread t2 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5000; i++) {
+                counter--;
+            }
+        }, "t2");
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        log.debug("{}", counter);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag38')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch03_Synchronized.java: 16-38
+</a>
+<div class="mid" id="frag38" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5000; i++) {
+                synchronized (lock) {
+                    counter++;
+                }
+            }
+        }, "t1");
+
+        Thread t2 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; 5000; i++) {
+                synchronized (lock) {
+                    counter--;
+                }
+            }
+        }, "t2");
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        log.debug("{}", counter);
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 11:</b> &nbsp; 2 fragments, nominal size 32 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag44')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch04_ThreadSample.java: 9-44
+</a>
+<div class="mid" id="frag44" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Hashtable table = new Hashtable();
+        Thread t1 = new Thread(() -&gt; {
+            if (table.get("key") == null) {
+                try {
+                    Thread.sleep(3000);
+                    log.debug("t1....");
+                    log.debug("t1....");
+                    table.put("key", "1");
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Thread t2 = new Thread(() -&gt; {
+            if (table.get("key") == null) {
+                try {
+                    Thread.sleep(3000);
+                    log.debug("t2....");
+                    log.debug("t2....");
+                    table.put("key", "2");
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println(table);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag262')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch04_ThreadSample.java: 9-44
+</a>
+<div class="mid" id="frag262" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Hashtable table = new Hashtable();
+        Thread t1 = new Thread(() -&gt; {
+            if (table.get("key") == null) {
+                try {
+                    Thread.sleep(3000);
+                    log.debug("t1....");
+                    log.debug("t1....");
+                    table.put("key", "1");
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Thread t2 = new Thread(() -&gt; {
+            if (table.get("key") == null) {
+                try {
+                    Thread.sleep(3000);
+                    log.debug("t2....");
+                    log.debug("t2....");
+                    table.put("key", "2");
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println(table);
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 12:</b> &nbsp; 2 fragments, nominal size 29 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag46')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch06_TestWaitNotify.java: 9-44
+</a>
+<div class="mid" id="frag46" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+
+        new Thread(() -&gt; {
+            synchronized (obj) {
+                log.debug("执行....");
+                try {
+                    obj.wait(); // 让线程在obj上一直等待下去
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                log.debug("其它代码....");
+            }
+        }).start();
+
+        new Thread(() -&gt; {
+            synchronized (obj) {
+                log.debug("执行....");
+                try {
+                    obj.wait(); // 让线程在obj上一直等待下去
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                log.debug("其它代码....");
+            }
+        }).start();
+
+        // 主线程两秒后执行
+        Thread.sleep(2);
+        log.debug("唤醒 obj 上其它线程");
+        synchronized (obj) {
+//            obj.notify(); // 唤醒obj上一个线程
+            obj.notifyAll(); // 唤醒obj上所有等待线程
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag264')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch06_TestWaitNotify.java: 9-44
+</a>
+<div class="mid" id="frag264" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+
+        new Thread(() -&gt; {
+            synchronized (obj) {
+                log.debug("执行....");
+                try {
+                    obj.wait(); // 让线程在obj上一直等待下去
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                log.debug("其它代码....");
+            }
+        }).start();
+
+        new Thread(() -&gt; {
+            synchronized (obj) {
+                log.debug("执行....");
+                try {
+                    obj.wait(); // 让线程在obj上一直等待下去
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                log.debug("其它代码....");
+            }
+        }).start();
+
+        // 主线程两秒后执行
+        Thread.sleep(2);
+        log.debug("唤醒 obj 上其它线程");
+        synchronized (obj) {
+//            obj.notify(); // 唤醒obj上一个线程
+            obj.notifyAll(); // 唤醒obj上所有等待线程
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 13:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag47')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch07_LockExpansion.java: 17-29
+</a>
+<div class="mid" id="frag47" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        log.debug("1、初始：01 无锁");
+        System.out.println(SimpleClassLayout.parseInstance(lock).toPrintSimple());
+
+        log.debug("2、开启子线程,第一次synchonized上轻量级,休眠3s,保持锁持有状态: 00");
+        new Thread(Ch07_LockExpansion::method1).start();
+        Thread.sleep(500);
+
+        log.debug("3、主线程请求锁,锁仍被占用，锁膨胀至：10");
+        synchronized (lock) {
+            System.out.println(SimpleClassLayout.parseInstance(lock).toPrintSimple());
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag265')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch07_LockExpansion.java: 17-29
+</a>
+<div class="mid" id="frag265" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        log.debug("1、初始：01 无锁");
+        System.out.println(SimpleClassLayout.parseInstance(lock).toPrintSimple());
+
+        log.debug("2、开启子线程,第一次synchonized上轻量级,休眠3s,保持锁持有状态: 00");
+        new Thread(Ch07_LockExpansion::method1).start();
+        Thread.sleep(500);
+
+        log.debug("3、主线程请求锁,锁仍被占用，锁膨胀至：10");
+        synchronized (lock) {
+            System.out.println(SimpleClassLayout.parseInstance(lock).toPrintSimple());
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 14:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag48')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch07_LockExpansion.java: 31-41
+</a>
+<div class="mid" id="frag48" style="display:none"><pre>
+    private static void method1() {
+        synchronized (lock) {
+            System.out.println(SimpleClassLayout.parseInstance(lock).toPrintSimple());
+            try {
+                Thread.sleep(3000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag266')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch02/Ch07_LockExpansion.java: 31-41
+</a>
+<div class="mid" id="frag266" style="display:none"><pre>
+    private static void method1() {
+        synchronized (lock) {
+            System.out.println(SimpleClassLayout.parseInstance(lock).toPrintSimple());
+            try {
+                Thread.sleep(3000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 15:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag51')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch03/TEST_BiasedLock.java: 8-18
+</a>
+<div class="mid" id="frag51" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5);
+        Object o = new Object();
+        System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        System.out.println("================================================================================================");
+        Object o2= new Object();
+        System.out.println(ClassLayout.parseInstance(o2).toPrintable());
+        synchronized (o){
+            System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag269')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch03/TEST_BiasedLock.java: 8-18
+</a>
+<div class="mid" id="frag269" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(5);
+        Object o = new Object();
+        System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        System.out.println("================================================================================================");
+        Object o2= new Object();
+        System.out.println(ClassLayout.parseInstance(o2).toPrintable());
+        synchronized (o){
+            System.out.println(ClassLayout.parseInstance(o).toPrintable());
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 16:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag52')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock1.java: 11-21
+</a>
+<div class="mid" id="frag52" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Object o1 = new Object();
+        synchronized (o1) {
+            log.debug(SimpleClassLayout.parseInstance(o1).toPrintSimple());
+        }
+        TimeUnit.SECONDS.sleep(5);
+        Object o2 = new Object();
+        synchronized (o2) {
+            log.debug(SimpleClassLayout.parseInstance(o2).toPrintSimple());
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag270')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock1.java: 11-21
+</a>
+<div class="mid" id="frag270" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Object o1 = new Object();
+        synchronized (o1) {
+            log.debug(SimpleClassLayout.parseInstance(o1).toPrintSimple());
+        }
+        TimeUnit.SECONDS.sleep(5);
+        Object o2 = new Object();
+        synchronized (o2) {
+            log.debug(SimpleClassLayout.parseInstance(o2).toPrintSimple());
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 17:</b> &nbsp; 2 fragments, nominal size 16 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag55')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock4.java: 10-26
+</a>
+<div class="mid" id="frag55" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Object o = new Object();
+        log.debug("synchronized前：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+        synchronized (o) {
+            log.debug("synchronized中：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+        }
+        log.debug("synchronized后：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+
+        TimeUnit.SECONDS.sleep(1);
+        new Thread(()-&gt;{
+            log.debug("synchronized前：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+            synchronized (o) {
+                log.debug("synchronized中：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+            }
+            log.debug("synchronized后：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+        },"t2").start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag273')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock4.java: 10-26
+</a>
+<div class="mid" id="frag273" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Object o = new Object();
+        log.debug("synchronized前：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+        synchronized (o) {
+            log.debug("synchronized中：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+        }
+        log.debug("synchronized后：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+
+        TimeUnit.SECONDS.sleep(1);
+        new Thread(()-&gt;{
+            log.debug("synchronized前：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+            synchronized (o) {
+                log.debug("synchronized中：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+            }
+            log.debug("synchronized后：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+        },"t2").start();
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 18:</b> &nbsp; 2 fragments, nominal size 24 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag56')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock5.java: 10-35
+</a>
+<div class="mid" id="frag56" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Object o = new Object();
+        new Thread(() -&gt; {
+            log.debug(SimpleClassLayout.parseInstance(o).toPrintSimple());
+            synchronized (o) {
+                log.debug("wait前：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+                try {
+                    o.wait();
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                log.debug("wait后：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+            }
+        }, "t1").start();
+        TimeUnit.SECONDS.sleep(3);
+        new Thread(() -&gt; {
+            synchronized (o) {
+                log.debug("notify");
+                o.notify();
+            }
+        }, "t2").start();
+
+        TimeUnit.SECONDS.sleep(1);
+        log.debug("最终:" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag274')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock5.java: 10-35
+</a>
+<div class="mid" id="frag274" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Object o = new Object();
+        new Thread(() -&gt; {
+            log.debug(SimpleClassLayout.parseInstance(o).toPrintSimple());
+            synchronized (o) {
+                log.debug("wait前：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+                try {
+                    o.wait();
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                log.debug("wait后：" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+            }
+        }, "t1").start();
+        TimeUnit.SECONDS.sleep(3);
+        new Thread(() -&gt; {
+            synchronized (o) {
+                log.debug("notify");
+                o.notify();
+            }
+        }, "t2").start();
+
+        TimeUnit.SECONDS.sleep(1);
+        log.debug("最终:" + SimpleClassLayout.parseInstance(o).toPrintSimple());
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 19:</b> &nbsp; 4 fragments, nominal size 31 lines, similarity 81%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag57')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock6.java: 14-43
+</a>
+<div class="mid" id="frag57" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Vector&lt;Lock&gt; list = new Vector&lt;&gt;();
+        int loopNumber = 5;
+        t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; loopNumber; i++) {
+                Lock o = new Lock();
+                list.add(o);
+                synchronized (o) {
+                    log.debug(++i + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+                }
+                i--;
+            }
+            LockSupport.unpark(t2);
+        }, "t1");
+        t1.start();
+
+        t2 = new Thread(() -&gt; {
+            LockSupport.park();
+            log.debug("================================");
+            for (int i = 0; i &lt; loopNumber; i++) {
+                Lock o = list.get(i++);
+                synchronized (o) {
+                }
+                log.debug(i-- + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+            }
+        }, "t2");
+        t2.start();
+        t2.join();
+        log.debug(SimpleClassLayout.parseInstance(new Lock()).toPrintSimple(false));
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag275')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock6.java: 14-43
+</a>
+<div class="mid" id="frag275" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Vector&lt;Lock&gt; list = new Vector&lt;&gt;();
+        int loopNumber = 5;
+        t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; loopNumber; i++) {
+                Lock o = new Lock();
+                list.add(o);
+                synchronized (o) {
+                    log.debug(++i + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+                }
+                i--;
+            }
+            LockSupport.unpark(t2);
+        }, "t1");
+        t1.start();
+
+        t2 = new Thread(() -&gt; {
+            LockSupport.park();
+            log.debug("================================");
+            for (int i = 0; i &lt; loopNumber; i++) {
+                Lock o = list.get(i++);
+                synchronized (o) {
+                }
+                log.debug(i-- + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+            }
+        }, "t2");
+        t2.start();
+        t2.join();
+        log.debug(SimpleClassLayout.parseInstance(new Lock()).toPrintSimple(false));
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag276')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock7.java: 14-47
+</a>
+<div class="mid" id="frag276" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+
+        Vector&lt;Lock&gt; list = new Vector&lt;&gt;();
+        int loopNumber = 4;
+        t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; loopNumber; i++) {
+                int h = i + 1;
+                Lock o = new Lock();
+                list.add(o);
+                synchronized (o) {
+                    log.debug(h + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+                }
+            }
+            LockSupport.unpark(t2);
+        }, "t1");
+        t1.start();
+
+        t2 = new Thread(() -&gt; {
+            LockSupport.park();
+            log.debug("================================");
+            for (int i = 0; i &lt; loopNumber; i++) {
+                int h = i + 1;
+                Lock o = list.get(i);
+                //  log.debug(i + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+                synchronized (o) {
+                    //  log.debug(i + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+                }
+                log.debug(h + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+            }
+        }, "t2");
+        t2.start();
+        t2.join();
+        log.debug(SimpleClassLayout.parseInstance(new Lock()).toPrintSimple(false));
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag58')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch03/Test_BiaseLock7.java: 14-47
+</a>
+<div class="mid" id="frag58" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+
+        Vector&lt;Lock&gt; list = new Vector&lt;&gt;();
+        int loopNumber = 4;
+        t1 = new Thread(() -&gt; {
+            for (int i = 0; i &lt; loopNumber; i++) {
+                int h = i + 1;
+                Lock o = new Lock();
+                list.add(o);
+                synchronized (o) {
+                    log.debug(h + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+                }
+            }
+            LockSupport.unpark(t2);
+        }, "t1");
+        t1.start();
+
+        t2 = new Thread(() -&gt; {
+            LockSupport.park();
+            log.debug("================================");
+            for (int i = 0; i &lt; loopNumber; i++) {
+                int h = i + 1;
+                Lock o = list.get(i);
+                //  log.debug(i + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+                synchronized (o) {
+                    //  log.debug(i + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+                }
+                log.debug(h + "\t" + SimpleClassLayout.parseInstance(o).toPrintSimple(false));
+            }
+        }, "t2");
+        t2.start();
+        t2.join();
+        log.debug(SimpleClassLayout.parseInstance(new Lock()).toPrintSimple(false));
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 20:</b> &nbsp; 2 fragments, nominal size 12 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag66')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject.java: 11-23
+</a>
+<div class="mid" id="frag66" style="display:none"><pre>
+    public Object getResponse() {
+        synchronized (lock) {
+            while (response == null) {
+                try {
+                    lock.wait();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return response;
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag284')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject.java: 11-23
+</a>
+<div class="mid" id="frag284" style="display:none"><pre>
+    public Object getResponse() {
+        synchronized (lock) {
+            while (response == null) {
+                try {
+                    lock.wait();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return response;
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 21:</b> &nbsp; 4 fragments, nominal size 17 lines, similarity 93%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag68')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject.java: 32-51
+</a>
+<div class="mid" id="frag68" style="display:none"><pre>
+    public static void main(String[] args) {
+        Test_GuardedObject object = new Test_GuardedObject();
+        new Thread(() -&gt; {
+            log.debug("开始设置回应...");
+            // 模拟耗时操作
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String response = "一个response";
+            log.debug("给出回应,{}", response);
+            object.setResponse(response);
+        }, "t1").start();
+
+        log.debug("等待...");
+        Object response = object.getResponse();
+        log.debug(String.valueOf(response));
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag286')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject.java: 32-51
+</a>
+<div class="mid" id="frag286" style="display:none"><pre>
+    public static void main(String[] args) {
+        Test_GuardedObject object = new Test_GuardedObject();
+        new Thread(() -&gt; {
+            log.debug("开始设置回应...");
+            // 模拟耗时操作
+            try {
+                TimeUnit.SECONDS.sleep(3);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String response = "一个response";
+            log.debug("给出回应,{}", response);
+            object.setResponse(response);
+        }, "t1").start();
+
+        log.debug("等待...");
+        Object response = object.getResponse();
+        log.debug(String.valueOf(response));
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag289')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject2.java: 48-67
+</a>
+<div class="mid" id="frag289" style="display:none"><pre>
+    public static void main(String[] args) {
+        Test_GuardedObject2 object = new Test_GuardedObject2();
+        new Thread(() -&gt; {
+            log.debug("开始设置回应...");
+            // 模拟耗时操作
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String response = "一个response";
+            log.debug("给出回应,{}", response);
+            object.setResponse(response);
+        }, "t1").start();
+
+        log.debug("等待...");
+        Object response = object.getResponse(2000);
+        log.debug(String.valueOf(response));
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag71')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject2.java: 48-67
+</a>
+<div class="mid" id="frag71" style="display:none"><pre>
+    public static void main(String[] args) {
+        Test_GuardedObject2 object = new Test_GuardedObject2();
+        new Thread(() -&gt; {
+            log.debug("开始设置回应...");
+            // 模拟耗时操作
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String response = "一个response";
+            log.debug("给出回应,{}", response);
+            object.setResponse(response);
+        }, "t1").start();
+
+        log.debug("等待...");
+        Object response = object.getResponse(2000);
+        log.debug(String.valueOf(response));
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 22:</b> &nbsp; 4 fragments, nominal size 20 lines, similarity 81%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag69')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject2.java: 13-39
+</a>
+<div class="mid" id="frag69" style="display:none"><pre>
+    public Object getResponse(long mills) {
+        // 1、 记录最初时间
+        long begin = System.currentTimeMillis();
+        // 2、 已经经历的时间
+        long passTime = 0;
+        synchronized (lock) {
+            while (response == null) {
+                // 4、 假设 millis 是 1000，结果在 400 时唤醒了，那么还有 600 要等
+                long waitTime = mills - passTime;
+                if (waitTime &lt;= 0) {
+                    log.debug("break!");
+                    break;
+                }
+                try {
+                    lock.wait(waitTime);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                // 3、 如果提前被唤醒，这时已经经历的时间假设为 400
+                passTime = System.currentTimeMillis() - begin;
+                log.debug("timePassed: {}, object is null {}",
+                        passTime, response == null);
+            }
+            return response;
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag287')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject2.java: 13-39
+</a>
+<div class="mid" id="frag287" style="display:none"><pre>
+    public Object getResponse(long mills) {
+        // 1、 记录最初时间
+        long begin = System.currentTimeMillis();
+        // 2、 已经经历的时间
+        long passTime = 0;
+        synchronized (lock) {
+            while (response == null) {
+                // 4、 假设 millis 是 1000，结果在 400 时唤醒了，那么还有 600 要等
+                long waitTime = mills - passTime;
+                if (waitTime &lt;= 0) {
+                    log.debug("break!");
+                    break;
+                }
+                try {
+                    lock.wait(waitTime);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                // 3、 如果提前被唤醒，这时已经经历的时间假设为 400
+                passTime = System.currentTimeMillis() - begin;
+                log.debug("timePassed: {}, object is null {}",
+                        passTime, response == null);
+            }
+            return response;
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag292')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject3.java: 43-67
+</a>
+<div class="mid" id="frag292" style="display:none"><pre>
+    public synchronized Object getResponse(long mills) {
+        // 1、 记录最初时间
+        long begin = System.currentTimeMillis();
+        // 2、 已经经历的时间
+        long passTime = 0;
+        while (response == null) {
+            // 4、 假设 millis 是 1000，结果在 400 时唤醒了，那么还有 600 要等
+            long waitTime = mills - passTime;
+            if (waitTime &lt;= 0) {
+                log.debug("break!");
+                break;
+            }
+            try {
+                this.wait(waitTime);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            // 3、 如果提前被唤醒，这时已经经历的时间假设为 400
+            passTime = System.currentTimeMillis() - begin;
+//            log.debug("timePassed: {}, object is null {}",
+//                    passTime, response == null);
+        }
+        return response;
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag74')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject3.java: 43-67
+</a>
+<div class="mid" id="frag74" style="display:none"><pre>
+    public synchronized Object getResponse(long mills) {
+        // 1、 记录最初时间
+        long begin = System.currentTimeMillis();
+        // 2、 已经经历的时间
+        long passTime = 0;
+        while (response == null) {
+            // 4、 假设 millis 是 1000，结果在 400 时唤醒了，那么还有 600 要等
+            long waitTime = mills - passTime;
+            if (waitTime &lt;= 0) {
+                log.debug("break!");
+                break;
+            }
+            try {
+                this.wait(waitTime);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            // 3、 如果提前被唤醒，这时已经经历的时间假设为 400
+            passTime = System.currentTimeMillis() - begin;
+//            log.debug("timePassed: {}, object is null {}",
+//                    passTime, response == null);
+        }
+        return response;
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 23:</b> &nbsp; 2 fragments, nominal size 19 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag72')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject3.java: 12-31
+</a>
+<div class="mid" id="frag72" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        // 收信人
+        for (int i = 1; i &lt;= 3; i++) {
+            new Thread(() -&gt; {
+                GuardedObject guardedObject = MailBoxes.createGuardedObject();
+                log.debug("等待");
+                Object response = guardedObject.getResponse(5000);
+                log.debug("收到回应 id:{}, 内容:{}", guardedObject.getId(), response);
+            }, "收信人" + i).start();
+        }
+        TimeUnit.SECONDS.sleep(2);
+        MailBoxes.getIds().forEach((id) -&gt; {
+            new Thread(() -&gt; {
+                GuardedObject guardedObject = MailBoxes.getGuardedObject(id);
+                log.debug("送信 id:{}, 内容:{}", id, "回应" + id);
+                guardedObject.setResponse("回应" + id);
+            }, "邮递员" + id).start();
+        });
+
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag290')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_GuardedObject3.java: 12-31
+</a>
+<div class="mid" id="frag290" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        // 收信人
+        for (int i = 1; i &lt;= 3; i++) {
+            new Thread(() -&gt; {
+                GuardedObject guardedObject = MailBoxes.createGuardedObject();
+                log.debug("等待");
+                Object response = guardedObject.getResponse(5000);
+                log.debug("收到回应 id:{}, 内容:{}", guardedObject.getId(), response);
+            }, "收信人" + i).start();
+        }
+        TimeUnit.SECONDS.sleep(2);
+        MailBoxes.getIds().forEach((id) -&gt; {
+            new Thread(() -&gt; {
+                GuardedObject guardedObject = MailBoxes.getGuardedObject(id);
+                log.debug("送信 id:{}, 内容:{}", id, "回应" + id);
+                guardedObject.setResponse("回应" + id);
+            }, "邮递员" + id).start();
+        });
+
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 24:</b> &nbsp; 2 fragments, nominal size 16 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag81')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_ProducerAndConsumer.java: 9-23
+</a>
+<div class="mid" id="frag81" style="display:none"><pre>
+    public static void main(String[] args) {
+        MessageQueue queue = new MessageQueue(3);
+        for (int i = 0; i &lt; 5; i++) {
+            int finalI = i;
+            new Thread(() -&gt; queue.put("内容" + finalI), "producer" + i).start();
+        }
+        for (int j = 0; j &lt; 5; j++) {
+            int finalJ = j;
+            new Thread(() -&gt; {
+                String take = queue.take();
+                log.debug(finalJ + "取到了" + take);
+            }, "consumer" + j).start();
+        }
+
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag299')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_ProducerAndConsumer.java: 9-23
+</a>
+<div class="mid" id="frag299" style="display:none"><pre>
+    public static void main(String[] args) {
+        MessageQueue queue = new MessageQueue(3);
+        for (int i = 0; i &lt; 5; i++) {
+            int finalI = i;
+            new Thread(() -&gt; queue.put("内容" + finalI), "producer" + i).start();
+        }
+        for (int j = 0; j &lt; 5; j++) {
+            int finalJ = j;
+            new Thread(() -&gt; {
+                String take = queue.take();
+                log.debug(finalJ + "取到了" + take);
+            }, "consumer" + j).start();
+        }
+
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 25:</b> &nbsp; 2 fragments, nominal size 15 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag83')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_ProducerAndConsumer.java: 36-51
+</a>
+<div class="mid" id="frag83" style="display:none"><pre>
+    public String take() {
+        synchronized (messageQueue) {
+            while (messageQueue.isEmpty()) {
+                log.debug("没货了, wait");
+                try {
+                    messageQueue.wait();
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            String message = messageQueue.removeFirst();
+            messageQueue.notifyAll();
+            return message;
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag301')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_ProducerAndConsumer.java: 36-51
+</a>
+<div class="mid" id="frag301" style="display:none"><pre>
+    public String take() {
+        synchronized (messageQueue) {
+            while (messageQueue.isEmpty()) {
+                log.debug("没货了, wait");
+                try {
+                    messageQueue.wait();
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            String message = messageQueue.removeFirst();
+            messageQueue.notifyAll();
+            return message;
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 26:</b> &nbsp; 2 fragments, nominal size 14 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag84')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_ProducerAndConsumer.java: 53-67
+</a>
+<div class="mid" id="frag84" style="display:none"><pre>
+    public void put(String msg) {
+        synchronized (messageQueue) {
+            while (messageQueue.size() == capacity) {
+                log.debug("库存满了!");
+                try {
+                    messageQueue.wait();
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            messageQueue.addLast(msg);
+            messageQueue.notifyAll();
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag302')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch04/Test_ProducerAndConsumer.java: 53-67
+</a>
+<div class="mid" id="frag302" style="display:none"><pre>
+    public void put(String msg) {
+        synchronized (messageQueue) {
+            while (messageQueue.size() == capacity) {
+                log.debug("库存满了!");
+                try {
+                    messageQueue.wait();
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            messageQueue.addLast(msg);
+            messageQueue.notifyAll();
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 27:</b> &nbsp; 2 fragments, nominal size 17 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag85')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch05/TestPark.java: 9-27
+</a>
+<div class="mid" id="frag85" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            log.debug("start...");
+            try {
+                Thread.sleep(2000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.debug("park...");
+            LockSupport.park();
+            log.debug("resume...");
+        }, "t1");
+        t1.start();
+
+        Thread.sleep(1000);
+        log.debug("unpark...");
+        LockSupport.unpark(t1);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag303')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch05/TestPark.java: 9-27
+</a>
+<div class="mid" id="frag303" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -&gt; {
+            log.debug("start...");
+            try {
+                Thread.sleep(2000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.debug("park...");
+            LockSupport.park();
+            log.debug("resume...");
+        }, "t1");
+        t1.start();
+
+        Thread.sleep(1000);
+        log.debug("unpark...");
+        LockSupport.unpark(t1);
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 28:</b> &nbsp; 4 fragments, nominal size 12 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag88')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch06/Test_Philosopher.java: 6-17
+</a>
+<div class="mid" id="frag88" style="display:none"><pre>
+    public static void main(String[] args) {
+        Chopstick c1 = new Chopstick("1");
+        Chopstick c2 = new Chopstick("2");
+        Chopstick c3 = new Chopstick("3");
+        Chopstick c4 = new Chopstick("4");
+        Chopstick c5 = new Chopstick("5");
+        new Philosopher("苏格拉底", c1, c2).start();
+        new Philosopher("柏拉图", c2, c3).start();
+        new Philosopher("亚里士多德", c3, c4).start();
+        new Philosopher("赫拉克利特", c4, c5).start();
+        new Philosopher("阿基米德", c5, c1).start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag312')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch06/Test_Philosopher2.java: 8-19
+</a>
+<div class="mid" id="frag312" style="display:none"><pre>
+    public static void main(String[] args) {
+        Chopstick2 c1 = new Chopstick2("1");
+        Chopstick2 c2 = new Chopstick2("2");
+        Chopstick2 c3 = new Chopstick2("3");
+        Chopstick2 c4 = new Chopstick2("4");
+        Chopstick2 c5 = new Chopstick2("5");
+        new Philosopher2("苏格拉底", c1, c2).start();
+        new Philosopher2("柏拉图", c2, c3).start();
+        new Philosopher2("亚里士多德", c3, c4).start();
+        new Philosopher2("赫拉克利特", c4, c5).start();
+        new Philosopher2("阿基米德", c5, c1).start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag306')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch06/Test_Philosopher.java: 6-17
+</a>
+<div class="mid" id="frag306" style="display:none"><pre>
+    public static void main(String[] args) {
+        Chopstick c1 = new Chopstick("1");
+        Chopstick c2 = new Chopstick("2");
+        Chopstick c3 = new Chopstick("3");
+        Chopstick c4 = new Chopstick("4");
+        Chopstick c5 = new Chopstick("5");
+        new Philosopher("苏格拉底", c1, c2).start();
+        new Philosopher("柏拉图", c2, c3).start();
+        new Philosopher("亚里士多德", c3, c4).start();
+        new Philosopher("赫拉克利特", c4, c5).start();
+        new Philosopher("阿基米德", c5, c1).start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag94')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch06/Test_Philosopher2.java: 8-19
+</a>
+<div class="mid" id="frag94" style="display:none"><pre>
+    public static void main(String[] args) {
+        Chopstick2 c1 = new Chopstick2("1");
+        Chopstick2 c2 = new Chopstick2("2");
+        Chopstick2 c3 = new Chopstick2("3");
+        Chopstick2 c4 = new Chopstick2("4");
+        Chopstick2 c5 = new Chopstick2("5");
+        new Philosopher2("苏格拉底", c1, c2).start();
+        new Philosopher2("柏拉图", c2, c3).start();
+        new Philosopher2("亚里士多德", c3, c4).start();
+        new Philosopher2("赫拉克利特", c4, c5).start();
+        new Philosopher2("阿基米德", c5, c1).start();
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 29:</b> &nbsp; 2 fragments, nominal size 17 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag98')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D1/Ch06/Test_Philosopher2.java: 47-65
+</a>
+<div class="mid" id="frag98" style="display:none"><pre>
+    public void run() {
+        while (true) {
+            // 尝试获得左手筷子
+            if (left.tryLock()) {
+                try {
+                    // 尝试获得右手筷子
+                    if (right.tryLock()) {
+                        try {
+                            eat();
+                        } finally {
+                            right.unlock();
+                        }
+                    }
+                } finally {
+                    left.unlock();
+                }
+            }
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag316')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D1/Ch06/Test_Philosopher2.java: 47-65
+</a>
+<div class="mid" id="frag316" style="display:none"><pre>
+    public void run() {
+        while (true) {
+            // 尝试获得左手筷子
+            if (left.tryLock()) {
+                try {
+                    // 尝试获得右手筷子
+                    if (right.tryLock()) {
+                        try {
+                            eat();
+                        } finally {
+                            right.unlock();
+                        }
+                    }
+                } finally {
+                    left.unlock();
+                }
+            }
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 30:</b> &nbsp; 4 fragments, nominal size 16 lines, similarity 71%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag101')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D2/Test_balking.java: 28-46
+</a>
+<div class="mid" id="frag101" style="display:none"><pre>
+    public void start() {
+        synchronized (this) {
+            if (isRunning) {
+                return;
+            }
+            isRunning = true;
+        }
+        monitor = new Thread(() -&gt; {
+            while (true) {
+                if (stop) {
+                    log.debug("处理后事！");
+                    break;
+                }
+                sleep(1);
+                log.debug("running!");
+            }
+        });
+        monitor.start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag322')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D2/Test_TwoPhaseTermination.java: 30-42
+</a>
+<div class="mid" id="frag322" style="display:none"><pre>
+    public void start() {
+        monitor = new Thread(() -&gt; {
+            while (true) {
+                if (stop) {
+                    log.debug("处理后事！");
+                    break;
+                }
+                sleep(1);
+                log.debug("running!");
+            }
+        });
+        monitor.start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag319')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D2/Test_balking.java: 28-46
+</a>
+<div class="mid" id="frag319" style="display:none"><pre>
+    public void start() {
+        synchronized (this) {
+            if (isRunning) {
+                return;
+            }
+            isRunning = true;
+        }
+        monitor = new Thread(() -&gt; {
+            while (true) {
+                if (stop) {
+                    log.debug("处理后事！");
+                    break;
+                }
+                sleep(1);
+                log.debug("running!");
+            }
+        });
+        monitor.start();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag104')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D2/Test_TwoPhaseTermination.java: 30-42
+</a>
+<div class="mid" id="frag104" style="display:none"><pre>
+    public void start() {
+        monitor = new Thread(() -&gt; {
+            while (true) {
+                if (stop) {
+                    log.debug("处理后事！");
+                    break;
+                }
+                sleep(1);
+                log.debug("running!");
+            }
+        });
+        monitor.start();
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 31:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag106')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D2/Test_Visibility.java: 10-21
+</a>
+<div class="mid" id="frag106" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -&gt; {
+            while (run) {
+                System.out.println("running");
+            }
+        });
+        t.start();
+
+        sleep(3);
+        log.info("停止!");
+        run = false; // 线程t不会如预想的停下来
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag324')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D2/Test_Visibility.java: 10-21
+</a>
+<div class="mid" id="frag324" style="display:none"><pre>
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -&gt; {
+            while (run) {
+                System.out.println("running");
+            }
+        });
+        t.start();
+
+        sleep(3);
+        log.info("停止!");
+        run = false; // 线程t不会如预想的停下来
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 32:</b> &nbsp; 4 fragments, nominal size 23 lines, similarity 70%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag123')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D3/i/IAccount.java: 17-39
+</a>
+<div class="mid" id="frag123" style="display:none"><pre>
+    static void demo(IAccount account) {
+        List&lt;Thread&gt; ts = new ArrayList&lt;&gt;();
+        long start = System.nanoTime();
+        for (int i = 0; i &lt; 1000; i++) {
+            ts.add(new Thread(() -&gt; {
+                for (int j = 0; j &lt; 10; j++) {
+                    account.withdraw(1);
+                }
+            }));
+        }
+        ts.forEach(Thread::start);
+        ts.forEach(t -&gt; {
+            try {
+                t.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        long end = System.nanoTime();
+        System.out.println(account.getBalance()
+                + " cost: " + (end - start) / 1000_000 + " ms");
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag349')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomticAccumulator.java: 21-47
+</a>
+<div class="mid" id="frag349" style="display:none"><pre>
+    private static &lt;T&gt; void demo(Supplier&lt;T&gt; adderSupplier, Consumer&lt;T&gt; action) {
+        T adder = adderSupplier.get();
+
+        long start = System.currentTimeMillis();
+
+        List&lt;Thread&gt; ts = new ArrayList&lt;&gt;();
+        // 4 个线程，每人累加 50 万
+        for (int i = 0; i &lt; 40; i++) {
+            ts.add(new Thread(() -&gt; {
+                for (int j = 0; j &lt; 500000; j++) {
+                    action.accept(adder);
+                }
+            }));
+        }
+        ts.forEach(t -&gt; t.start());
+        ts.forEach(t -&gt; {
+            try {
+                t.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        long end = System.currentTimeMillis();
+        System.out.println(adder + " cost:" + (end - start)+"ms");
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag341')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D3/i/IAccount.java: 17-39
+</a>
+<div class="mid" id="frag341" style="display:none"><pre>
+    static void demo(IAccount account) {
+        List&lt;Thread&gt; ts = new ArrayList&lt;&gt;();
+        long start = System.nanoTime();
+        for (int i = 0; i &lt; 1000; i++) {
+            ts.add(new Thread(() -&gt; {
+                for (int j = 0; j &lt; 10; j++) {
+                    account.withdraw(1);
+                }
+            }));
+        }
+        ts.forEach(Thread::start);
+        ts.forEach(t -&gt; {
+            try {
+                t.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        long end = System.nanoTime();
+        System.out.println(account.getBalance()
+                + " cost: " + (end - start) / 1000_000 + " ms");
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag131')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomticAccumulator.java: 21-47
+</a>
+<div class="mid" id="frag131" style="display:none"><pre>
+    private static &lt;T&gt; void demo(Supplier&lt;T&gt; adderSupplier, Consumer&lt;T&gt; action) {
+        T adder = adderSupplier.get();
+
+        long start = System.currentTimeMillis();
+
+        List&lt;Thread&gt; ts = new ArrayList&lt;&gt;();
+        // 4 个线程，每人累加 50 万
+        for (int i = 0; i &lt; 40; i++) {
+            ts.add(new Thread(() -&gt; {
+                for (int j = 0; j &lt; 500000; j++) {
+                    action.accept(adder);
+                }
+            }));
+        }
+        ts.forEach(t -&gt; t.start());
+        ts.forEach(t -&gt; {
+            try {
+                t.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        long end = System.currentTimeMillis();
+        System.out.println(adder + " cost:" + (end - start)+"ms");
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 33:</b> &nbsp; 2 fragments, nominal size 12 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag124')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomicArr.java: 15-38
+</a>
+<div class="mid" id="frag124" style="display:none"><pre>
+    public static void main(String[] args) {
+        demo(
+                () -&gt; new int[10],
+                (arr) -&gt; arr.length,
+                (arr, i) -&gt; {
+                    arr[i] += 1;
+                },
+                (arr) -&gt; {
+                    System.out.println(Arrays.toString(arr));
+                }
+        );
+
+        demo(
+                () -&gt; new AtomicIntegerArray(10),
+                (arr) -&gt; arr.length(),
+                (arr, i) -&gt; {
+                    arr.getAndIncrement(i);
+                },
+                (arr) -&gt; {
+                    System.out.println(arr);
+                }
+        );
+
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag342')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomicArr.java: 15-38
+</a>
+<div class="mid" id="frag342" style="display:none"><pre>
+    public static void main(String[] args) {
+        demo(
+                () -&gt; new int[10],
+                (arr) -&gt; arr.length,
+                (arr, i) -&gt; {
+                    arr[i] += 1;
+                },
+                (arr) -&gt; {
+                    System.out.println(Arrays.toString(arr));
+                }
+        );
+
+        demo(
+                () -&gt; new AtomicIntegerArray(10),
+                (arr) -&gt; arr.length(),
+                (arr, i) -&gt; {
+                    arr.getAndIncrement(i);
+                },
+                (arr) -&gt; {
+                    System.out.println(arr);
+                }
+        );
+
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 34:</b> &nbsp; 2 fragments, nominal size 23 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag125')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomicArr.java: 41-68
+</a>
+<div class="mid" id="frag125" style="display:none"><pre>
+    private static &lt;T&gt; void demo(
+            Supplier&lt;T&gt; arraySupplier,
+            Function&lt;T, Integer&gt; lengthFun,
+            BiConsumer&lt;T, Integer&gt; putConsumer,
+            Consumer&lt;T&gt; printConsumer) {
+        List&lt;Thread&gt; ts = new ArrayList&lt;&gt;();
+        T array = arraySupplier.get();
+        int length = lengthFun.apply(array);
+        for (int i = 0; i &lt; length; i++) {
+            // 每个线程对数组作 10000 次操作
+            ts.add(new Thread(() -&gt; {
+                for (int j = 0; j &lt; 10000; j++) {
+                    putConsumer.accept(array, j % length);
+                }
+            }));
+        }
+
+        ts.forEach(t -&gt; t.start()); // 启动所有线程
+        ts.forEach(t -&gt; {
+            try {
+                t.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });     // 等所有线程结束
+        printConsumer.accept(array);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag343')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomicArr.java: 41-68
+</a>
+<div class="mid" id="frag343" style="display:none"><pre>
+    private static &lt;T&gt; void demo(
+            Supplier&lt;T&gt; arraySupplier,
+            Function&lt;T, Integer&gt; lengthFun,
+            BiConsumer&lt;T, Integer&gt; putConsumer,
+            Consumer&lt;T&gt; printConsumer) {
+        List&lt;Thread&gt; ts = new ArrayList&lt;&gt;();
+        T array = arraySupplier.get();
+        int length = lengthFun.apply(array);
+        for (int i = 0; i &lt; length; i++) {
+            // 每个线程对数组作 10000 次操作
+            ts.add(new Thread(() -&gt; {
+                for (int j = 0; j &lt; 10000; j++) {
+                    putConsumer.accept(array, j % length);
+                }
+            }));
+        }
+
+        ts.forEach(t -&gt; t.start()); // 启动所有线程
+        ts.forEach(t -&gt; {
+            try {
+                t.join();
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });     // 等所有线程结束
+        printConsumer.accept(array);
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 35:</b> &nbsp; 2 fragments, nominal size 15 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag126')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomicInteger.java: 6-30
+</a>
+<div class="mid" id="frag126" style="display:none"><pre>
+    public static void main(String[] args) {
+        AtomicInteger i = new AtomicInteger(0);
+
+        System.out.println(i.getAndIncrement());
+
+        System.out.println(i.incrementAndGet());
+
+        System.out.println(i.decrementAndGet());
+
+        System.out.println(i.getAndDecrement());
+
+        System.out.println(i.getAndAdd(5));
+
+        System.out.println(i.addAndGet(-5));
+
+        System.out.println(i.getAndUpdate(p -&gt; p - 2));
+
+        System.out.println(i.updateAndGet(p -&gt; p + 2));
+
+        i = new AtomicInteger(10);
+        System.out.println(i.getAndAccumulate(10, (p, x) -&gt; p * x));
+
+        i = new AtomicInteger(10);
+        System.out.println(i.accumulateAndGet(10, (p, x) -&gt; p * x));
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag344')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomicInteger.java: 6-30
+</a>
+<div class="mid" id="frag344" style="display:none"><pre>
+    public static void main(String[] args) {
+        AtomicInteger i = new AtomicInteger(0);
+
+        System.out.println(i.getAndIncrement());
+
+        System.out.println(i.incrementAndGet());
+
+        System.out.println(i.decrementAndGet());
+
+        System.out.println(i.getAndDecrement());
+
+        System.out.println(i.getAndAdd(5));
+
+        System.out.println(i.addAndGet(-5));
+
+        System.out.println(i.getAndUpdate(p -&gt; p - 2));
+
+        System.out.println(i.updateAndGet(p -&gt; p + 2));
+
+        i = new AtomicInteger(10);
+        System.out.println(i.getAndAccumulate(10, (p, x) -&gt; p * x));
+
+        i = new AtomicInteger(10);
+        System.out.println(i.accumulateAndGet(10, (p, x) -&gt; p * x));
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 36:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag129')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomicUpdater.java: 8-26
+</a>
+<div class="mid" id="frag129" style="display:none"><pre>
+    public static void main(String[] args) {
+
+        AtomicIntegerFieldUpdater fieldUpdater = AtomicIntegerFieldUpdater.newUpdater(TEST_AtomicUpdater.class, "field");
+
+        TEST_AtomicUpdater t = new TEST_AtomicUpdater();
+        fieldUpdater.compareAndSet(t, 0, 10);
+
+        // 修改成功 field = 10
+        System.out.println(t.field);
+
+        // 修改成功 field = 20
+        fieldUpdater.compareAndSet(t, 10, 20);
+        System.out.println(t.field);
+
+        // 修改失败 field = 20
+        fieldUpdater.compareAndSet(t, 10, 30);
+        System.out.println(t.field);
+
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag347')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomicUpdater.java: 8-26
+</a>
+<div class="mid" id="frag347" style="display:none"><pre>
+    public static void main(String[] args) {
+
+        AtomicIntegerFieldUpdater fieldUpdater = AtomicIntegerFieldUpdater.newUpdater(TEST_AtomicUpdater.class, "field");
+
+        TEST_AtomicUpdater t = new TEST_AtomicUpdater();
+        fieldUpdater.compareAndSet(t, 0, 10);
+
+        // 修改成功 field = 10
+        System.out.println(t.field);
+
+        // 修改成功 field = 20
+        fieldUpdater.compareAndSet(t, 10, 20);
+        System.out.println(t.field);
+
+        // 修改失败 field = 20
+        fieldUpdater.compareAndSet(t, 10, 30);
+        System.out.println(t.field);
+
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 37:</b> &nbsp; 2 fragments, nominal size 10 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag130')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomticAccumulator.java: 11-19
+</a>
+<div class="mid" id="frag130" style="display:none"><pre>
+    public static void main(String[] args) {
+        for (int i = 0; i &lt; 5; i++) {
+            demo(LongAdder::new, LongAdder::increment);
+        }
+
+        for (int i = 0; i &lt; 5; i++) {
+            demo(AtomicLong::new, AtomicLong::getAndIncrement);
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag348')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D3/TEST_AtomticAccumulator.java: 11-19
+</a>
+<div class="mid" id="frag348" style="display:none"><pre>
+    public static void main(String[] args) {
+        for (int i = 0; i &lt; 5; i++) {
+            demo(LongAdder::new, LongAdder::increment);
+        }
+
+        for (int i = 0; i &lt; 5; i++) {
+            demo(AtomicLong::new, AtomicLong::getAndIncrement);
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 38:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag132')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D3/TEST_UNSAFE.java: 9-23
+</a>
+<div class="mid" id="frag132" style="display:none"><pre>
+    public static void main(String[] args) throws NoSuchFieldException {
+        Unsafe unsafe = UnsafeAccessor.getUnsafe();
+        Field id = Student.class.getDeclaredField("id");
+        Field name = Student.class.getDeclaredField("name");
+        // 获得成员变量的偏移量
+        long idOffset = unsafe.objectFieldOffset(id);
+        long nameOffset = unsafe.objectFieldOffset(name);
+
+        Student student = new Student();
+        // 使用 cas 方法替换成员变量的值
+        unsafe.compareAndSwapInt(student, idOffset, 0, 20);  // 返回 true
+        unsafe.compareAndSwapObject(student, nameOffset, null, "张三"); // 返回 true
+
+        System.out.println(student);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag350')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D3/TEST_UNSAFE.java: 9-23
+</a>
+<div class="mid" id="frag350" style="display:none"><pre>
+    public static void main(String[] args) throws NoSuchFieldException {
+        Unsafe unsafe = UnsafeAccessor.getUnsafe();
+        Field id = Student.class.getDeclaredField("id");
+        Field name = Student.class.getDeclaredField("name");
+        // 获得成员变量的偏移量
+        long idOffset = unsafe.objectFieldOffset(id);
+        long nameOffset = unsafe.objectFieldOffset(name);
+
+        Student student = new Student();
+        // 使用 cas 方法替换成员变量的值
+        unsafe.compareAndSwapInt(student, idOffset, 0, 20);  // 返回 true
+        unsafe.compareAndSwapObject(student, nameOffset, null, "张三"); // 返回 true
+
+        System.out.println(student);
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 39:</b> &nbsp; 2 fragments, nominal size 21 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag138')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 34-58
+</a>
+<div class="mid" id="frag138" style="display:none"><pre>
+    public T poll(long timeout, TimeUnit unit) {
+        lock.lock();
         try {
-            imageOutputStream = ImageIO.createImageOutputStream(baos);
-            // 将二进制数据写进ByteArrayOutputStream
-            ImageIO.write(img, "PNG", imageOutputStream);
-            // ImageIO.write(img, "PNG", new File("D://33333.png"));
+            // 将 timeout 统一转换为 纳秒
+            long nanos = unit.toNanos(timeout);
+            while (queue.isEmpty()) {
+                try {
+                    // 返回值是剩余时间
+                    if (nanos &lt;= 0) {
+                        return null;
+                    }
+                    nanos = emptyWaitSet.awaitNanos(nanos);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            T t = queue.removeFirst();
+            fullWaitSet.signal();
+            return t;
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        finally {
+            lock.unlock();
         }
-        // 输出数组
-        sendRespose(baos.toByteArray());
     }
 </pre></div>
-                </td>
-            </tr><tr>
-        </tr>
-        </table>
-
-    </td></tr>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag356')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 34-58
+</a>
+<div class="mid" id="frag356" style="display:none"><pre>
+    public T poll(long timeout, TimeUnit unit) {
+        lock.lock();
+        try {
+            // 将 timeout 统一转换为 纳秒
+            long nanos = unit.toNanos(timeout);
+            while (queue.isEmpty()) {
+                try {
+                    // 返回值是剩余时间
+                    if (nanos &lt;= 0) {
+                        return null;
+                    }
+                    nanos = emptyWaitSet.awaitNanos(nanos);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            T t = queue.removeFirst();
+            fullWaitSet.signal();
+            return t;
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
 </table>
 <br>
 <table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
-    <tr><td style="background-color:white">
-        <p style="font-size:14pt"><b>Class 2:</b> &nbsp; 2 fragments, nominal size 32 lines, similarity 88%</p>
-        <table cellpadding=4 border=2>
-            <tr>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag25')" href="javascript:;">
-                        source/src/main/java/com/epoint/zfcgztbmis/fabaoreg/action/ZfcgBiaoDuanForListAction.java: 56-90
-                    </a>
-                    <div class="mid" id="frag25" style="display:none"><pre>
-    public DataGridModel&lt;CgBiaoduaninfo&gt; getDataModel() {
-        if (dataGridModel == null) {
-            dataGridModel = new DataGridModel&lt;CgBiaoduaninfo&gt;()
-            {
-                @Override
-                public List&lt;CgBiaoduaninfo&gt; fetchData(int first, int pageSize, String sortField, String SortOrder) {
-                    String sql = "select * from CG_BiaoDuanInfo where 1=1 ";
-                    String cntsql = "select COUNT(*) from Cg_Biaoduaninfo where 1=1 ";
-                    String where = getSearchCondition();
-                    // 加入项目暂停终止的过滤 modify by momo 2011-07-06
-                    if (!"BDYiChang".equals(type)) {
-                        where += " and (biaoduanno is not null or biaoduanno!='')  and auditstatus='3'  and ISNULL(iszuofei,'0')='0' and (isliubiao is null or isliubiao!='1')";
-                    }
-
-                    // 区分政府采购代理和中心的项目负责人,采用不同的过滤条件
-                    if (!DB_AllowTo.IsZBB()) {
-                        where += " and sbr_unitguid ='" + ContextHelper.getdanweiguid() + "'";
-                    }
-                    else {
-                        where += DB_Sys_Common.GetListCondition();
-                    }
-                    if (StringUtil.isNotBlank(LimitCondition))
-                        where += " and " + LimitCondition + " and projectjiaoyitype='M' ";
-                    sql += where;
-                    cntsql += where;
-                    sql += getGridSort(sortField, SortOrder, " order by row_id desc");
-                    int cnt = service.queryInt(cntsql);
-                    List&lt;CgBiaoduaninfo&gt; list = service.findList(sql, first, pageSize, CgBiaoduaninfo.class);
-                    this.setRowCount(cnt);
-                    return list;
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 40:</b> &nbsp; 2 fragments, nominal size 17 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag139')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 61-79
+</a>
+<div class="mid" id="frag139" style="display:none"><pre>
+    public T take() {
+        lock.lock();
+        try {
+            while (queue.isEmpty()) {
+                try {
+                    emptyWaitSet.await();
                 }
-            };
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            T t = queue.removeFirst();
+            fullWaitSet.signal();
+            return t;
         }
-        return dataGridModel;
+        finally {
+            lock.unlock();
+        }
     }
 </pre></div>
-                </td>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag8195')" href="javascript:;">
-                        target/src/main/java/com/epoint/zfcgztbmis/fabaoreg/action/HYZfcgBiaoDuanForListAction.java: 58-100
-                    </a>
-                    <div class="mid" id="frag8195" style="display:none"><pre>
-    public DataGridModel&lt;CgBiaoduaninfo&gt; getDataModel() {
-        if (dataGridModel == null) {
-            dataGridModel = new DataGridModel&lt;CgBiaoduaninfo&gt;()
-            {
-                @Override
-                public List&lt;CgBiaoduaninfo&gt; fetchData(int first, int pageSize, String sortField, String SortOrder) {
-                    String sql = "select * from CG_BiaoDuanInfo where 1=1 ";
-                    String cntsql = "select COUNT(*) from Cg_Biaoduaninfo where 1=1 ";
-                    String where = getSearchCondition();
-                    // 加入项目暂停终止的过滤 modify by momo 2011-07-06
-                    if (!"BDYiChang".equals(type)) {
-                        where += " and (biaoduanno is not null or biaoduanno!='')  and auditstatus='3'  and ISNULL(iszuofei,'0')='0' and (isliubiao is null or isliubiao!='1')";
-                    }
-
-                    // 区分政府采购代理和中心的项目负责人,采用不同的过滤条件
-                    if (!DB_AllowTo.IsZBB()) {
-                        // 业务系统兼容财政传过来的数据根据UnitOrgNum来筛选 add by zxhao 20180811
-                        where += " and ((sbr_unitguid='" + ContextHelper.getdanweiguid()
-                                + "') OR (SBR_NAME='衡阳财政局' AND PROJECTJIAOYITYPE='M' AND PROJECTGUID IN (SELECT PROJECTGUID FROM CG_ProjectInfo WHERE UnitOrgNum IN (SELECT UnitOrgNum FROM HuiYuan_UnitComInfo WHERE DanWeiGuid='"
-                                + MemberSession.getInstance().getDanWeiGuid() + "'))))";
-                    }
-                    else {
-                        where += DB_Sys_Common.GetListCondition();
-                    }
-                    if (StringUtil.isNotBlank(LimitCondition))
-                        where += " and " + LimitCondition + " and projectjiaoyitype='M' ";
-                    sql += where;
-                    cntsql += where;
-                    sql += getGridSort(sortField, SortOrder, " order by row_id desc");
-                    int cnt = service.queryInt(cntsql);
-                    List&lt;CgBiaoduaninfo&gt; list = service.findList(sql, first, pageSize, CgBiaoduaninfo.class);
-                    // 添加政府采购编号列 by mqiong 20181025
-                    for (CgBiaoduaninfo item : list) {
-                        item.set("zfcgno", service.queryString(
-                                "select zfcgno from cg_projectinfo where projectguid='" + item.getProjectguid() + "'"));
-                    }
-                    this.setRowCount(cnt);
-                    return list;
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag357')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 61-79
+</a>
+<div class="mid" id="frag357" style="display:none"><pre>
+    public T take() {
+        lock.lock();
+        try {
+            while (queue.isEmpty()) {
+                try {
+                    emptyWaitSet.await();
                 }
-            };
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            T t = queue.removeFirst();
+            fullWaitSet.signal();
+            return t;
         }
-        return dataGridModel;
+        finally {
+            lock.unlock();
+        }
     }
 </pre></div>
-                </td>
-            </tr><tr>
-        </tr>
-        </table>
-    </td></tr>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
 </table>
 <br>
 <table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
-    <tr><td style="background-color:white">
-        <p style="font-size:14pt"><b>Class 3:</b> &nbsp; 2 fragments, nominal size 157 lines, similarity 94%</p>
-        <table cellpadding=4 border=2>
-            <tr>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag27')" href="javascript:;">
-                        source/src/main/java/com/epoint/zfcgztbmis/fabaoreg/action/ZfcgBiaoDuanForListAction.java: 92-265
-                    </a>
-                    <div class="mid" id="frag27" style="display:none"><pre>
-    public String getSearchCondition() {
-        String strCondition = "";
-        if (StringUtil.isNotBlank(txtProNo)) {
-            strCondition += " and biaoduanno like '%" + service.SQL_Encode(txtProNo) + "%'";
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 41:</b> &nbsp; 2 fragments, nominal size 18 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag140')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 82-101
+</a>
+<div class="mid" id="frag140" style="display:none"><pre>
+    public void put(T task) {
+        lock.lock();
+        try {
+            while (queue.size() == capcity) {
+                try {
+                    log.debug("等待加入任务队列 {} ...", task);
+                    fullWaitSet.await();
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            log.debug("加入任务队列 {}", task);
+            queue.addLast(task);
+            emptyWaitSet.signal();
         }
-        if (StringUtil.isNotBlank(txtProName)) {
-            strCondition += " and biaoduanname like '%" + service.SQL_Encode(txtProName) + "%'";
+        finally {
+            lock.unlock();
         }
-
-        switch (BDChoiceType.toType(type.toLowerCase())) {
-            case caigouyg:
-                LimitCondition = "zhaobiaofangshi not in ('1','2','3')";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and biaoduanguid not in (select biaoduanguid FROM cg_yugaoandbd)";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and biaoduanguid in (select biaoduanguid FROM cg_yugaoandbd)";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Multi";
-                TargetUrl = "zfcgztbmis/pages/caigouyugao/CaiGouYuGao_Workflow";
-                break;
-            case zhaobiaogg:
-                LimitCondition = "projectguid in (select projectguid from  Cg_Projectinfo where auditstatus='3') and zhaobiaofangshi not in ('1')";
-
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and biaoduanguid not in (select biaoduanguid FROM CG_ZBGGAndBD)";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and biaoduanguid in (select biaoduanguid FROM CG_ZBGGAndBD)";
-                    showOkButton = false;
-                }
-                TargetUrl = "zfcgztbmis/pages/zhaobiaogginfo/ZBGG_Workflow";
-                rowCheckerType = "Multi";
-                break;
-            case biangenggg:
-                LimitCondition = "biaoduanguid in (select biaoduanguid from CgZbggandbd where auditstatus='3') and (BianGengGGChecked ='0' or BianGengGGChecked is null)";
-                rowCheckerType = "Multi";
-                // TargetUrl = "";
-                break;
-            case xieyicaigou:
-                LimitCondition = "zhaobiaofangshi='1'";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and (IsXieYi is null or IsXieYi='')";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and IsXieYi='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Single";
-                break;
-            case zbfile:
-                LimitCondition = "zhaobiaofangshi not in ('1','2','3') and  biaoduanguid in (select biaoduanguid from view_cg_zhaobiaogg WHERE auditstatus='3')";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and isnull(ZhaoBiaoBeiAnIsSelected,'0')='0'";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and ZhaoBiaoBeiAnIsSelected='1'";
-                    showOkButton = false;
-                }
-                if ("1".equals(getFrameConfigValue("政府采购_招标文件是否多选"))) {
-                    rowCheckerType = "Multi";
-                }
-                else {
-                    rowCheckerType = "Single";
-                }
-                TargetUrl = "zfcgztbmis/pages/zbfilereg/ZBFile_Workflow";
-                break;
-            case zbfilezhizuo:
-                LimitCondition = "zhaobiaofangshi NOT IN ('1','2','3') and biaoduanguid in (select biaoduanguid from view_cg_zhaobiaogg WHERE auditstatus='3')";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and isnull(ZhaoBiaoBeiAnIsSelected,'0')='0'";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and ZhaoBiaoBeiAnIsSelected='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Multi";
-                TargetUrl = "zfcgztbmis/pages/zbfilereg/ZBMBFile_List?FileType=ZB";
-                break;
-            case bdyichang:
-                // 如果标段异常主表已挑选过此标段，不能重复挑选 modify by zwb 2016-1-25
-                // 如果是现场变更只变更采购方式，可以多次挑选 吕素梅 2016-07-18
-                //LimitCondition = "BiaoDuanGuid in (select BiaoDuanGuid from cg_yichangbdhistory where auditstatus='3')";
-                LimitCondition += " biaoduanno IS NOT NULL ";
-                // 加入项目暂停终止的过滤 modify by momo 2011-07-06
-                LimitCondition += " and auditstatus='3' ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " AND yichangisselected='0'";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " AND yichangisselected='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Single";
-                TargetUrl = "zfcgztbmis/pages/liubiaocl/BiaoDuanYiChang_Workflow";
-                break;
-            case zhongbiaogongshi:
-                LimitCondition = "zhaobiaofangshi not in ('1','2','3') and biaoduanguid in (select biaoduanguid from view_cg_zhaobiaogg WHERE auditstatus='3') and kaibiaodate &lt; GETDATE() ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and (zhongbiaoisselected='0' or zhongbiaoisselected is null or zhongbiaoisselected='')";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and zhongbiaoisselected='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Multi";
-                TargetUrl = "zfcgztbmis/pages/zhongbiaogongshi/ZhongBiaoGS_Workflow";
-                break;
-            case zhongbiaotzs:
-                LimitCondition = "(gonggaoisselected='1' OR IsConfirmZhongBiaoDW='1') and biaoduanguid in (select biaoduanguid from View_CG_ZhongBiaoGS where auditstatus = '3')";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += "  and ( Zbjieguoisselected='0'  or Zbjieguoisselected is null or Zbjieguoisselected='')";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and Zbjieguoisselected = '1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Single";
-                TargetUrl = "zfcgztbmis/pages/zhongbiaotzs/ZhongBiaoTZS_Workflow";
-                break;
-            case zhaobiaorenpw:
-                LimitCondition = "zhaobiaofangshi NOT IN ('1','2','3')";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += "  and (ZbPingWeiIsSelected !='1' OR ZbPingWeiIsSelected is null )";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and ZbPingWeiIsSelected ='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Multi";
-                TargetUrl = "zfcgztbmis/pages/zhaobiaorenpw/ZhaoBiaoRenPW_Workflow";
-                break;
-            case hetong:
-                LimitCondition = "zhaobiaofangshi NOT IN ('1','2','3') AND (zhongbiaoisselected='1' OR isconfirmzhongbiaodw='1') ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += "  and isnull(HeTongIsSelected,'0')='0'";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and HeTongIsSelected='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Single";
-                TargetUrl = "zfcgztbmis/pages/hetongba/HeTongBA_Workflow";
-                break;
-            case smreport:
-                LimitCondition = "zhaobiaofangshi IN ('公','竞','邀','询') AND (zhongbiaoisselected='1' or IsConfirmZhongBiaoDW='1')";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += "  and (baogaodanisselected is null or baogaodanisselected='' or baogaodanisselected ='0')";
-                }
-                else {
-                    LimitCondition += " and baogaodanisselected ='1'";
-                }
-                showOkButton = true;
-                rowCheckerType = "Single";
-                TargetUrl = "";
-                break;
-            default:
-                break;
-        }
-
-        addViewData("TargetUrl", TargetUrl);
-        return strCondition;
     }
 </pre></div>
-                </td>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag8197')" href="javascript:;">
-                        target/src/main/java/com/epoint/zfcgztbmis/fabaoreg/action/HYZfcgBiaoDuanForListAction.java: 102-283
-                    </a>
-                    <div class="mid" id="frag8197" style="display:none"><pre>
-    public String getSearchCondition() {
-        String strCondition = "";
-        if (StringUtil.isNotBlank(txtProNo)) {
-            strCondition += " and biaoduanno like '%" + service.SQL_Encode(txtProNo) + "%'";
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag358')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 82-101
+</a>
+<div class="mid" id="frag358" style="display:none"><pre>
+    public void put(T task) {
+        lock.lock();
+        try {
+            while (queue.size() == capcity) {
+                try {
+                    log.debug("等待加入任务队列 {} ...", task);
+                    fullWaitSet.await();
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            log.debug("加入任务队列 {}", task);
+            queue.addLast(task);
+            emptyWaitSet.signal();
         }
-        if (StringUtil.isNotBlank(txtProName)) {
-            strCondition += " and biaoduanname like '%" + service.SQL_Encode(txtProName) + "%'";
+        finally {
+            lock.unlock();
         }
-
-        switch (HYBDChoiceType.toType(type.toLowerCase())) {
-            case caigouyg:
-                LimitCondition = "zhaobiaofangshi not in ('1','2','3') and (iscancel is null or isCancel not in ('1','2','3')) ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and biaoduanguid not in (select biaoduanguid FROM cg_yugaoandbd)";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and biaoduanguid in (select biaoduanguid FROM cg_yugaoandbd)";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Multi";
-                TargetUrl = "zfcgztbmis/pages/caigouyugao/CaiGouYuGao_Workflow";
-                break;
-            case zhaobiaogg:
-                LimitCondition = "projectguid in (select projectguid from  Cg_Projectinfo where auditstatus='3') and zhaobiaofangshi not in ('1') and (iscancel is null or isCancel not in ('1','2','3')) ";
-                // 增加zishentype 限制 edit by yangjian 20181123
-                // PPP项目也可以挑选，add by wangjian at 2019.8.13
-                LimitCondition += "and (isnull(zishentype,'2')='2' or ( isnull( zishentype, '2' ) = '1' ) AND projectGuid IN ( SELECT projectguid FROM CG_ProjectInfo WHERE isnull( ispppproject, '0' ) = '1' ))";
-
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and biaoduanguid not in (select isnull(biaoduanguid,'') FROM CG_ZBGGAndBD) ";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and biaoduanguid in (select isnull(biaoduanguid,'') FROM CG_ZBGGAndBD) ";
-                    showOkButton = false;
-                }
-                TargetUrl = "zfcgztbmis/pages/zhaobiaogginfo/ZBGG_Workflow";
-                rowCheckerType = "Multi";
-                break;
-            case biangenggg:
-                LimitCondition = "biaoduanguid in (select biaoduanguid from CgZbggandbd where auditstatus='3') and (BianGengGGChecked ='0' or BianGengGGChecked is null) and (iscancel is null or isCancel not in ('1','2','3'))";
-                rowCheckerType = "Multi";
-                // TargetUrl = "";
-                break;
-            case xieyicaigou:
-                LimitCondition = "zhaobiaofangshi='1' and (iscancel is null or isCancel not in ('1','2','3')) ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and (IsXieYi is null or IsXieYi='')";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and IsXieYi='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Single";
-                break;
-            case zbfile:
-                // 去除招标方式限制 edit by yangjian 20181207
-                LimitCondition = "biaoduanguid in (select biaoduanguid from cg_zhaobiaogginfo WHERE auditstatus='3') and (iscancel is null or isCancel not in ('1','2','3')) ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and isnull(ZhaoBiaoBeiAnIsSelected,'0')='0'";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and ZhaoBiaoBeiAnIsSelected='1'";
-                    showOkButton = false;
-                }
-                if ("1".equals(getFrameConfigValue("政府采购_招标文件是否多选"))) {
-                    rowCheckerType = "Multi";
-                }
-                else {
-                    rowCheckerType = "Single";
-                }
-                TargetUrl = "zfcgztbmis/pages/zbfilereg/ZBFile_Workflow";
-                break;
-            case zbfilezhizuo:
-                LimitCondition = "zhaobiaofangshi NOT IN ('1','2','3') and biaoduanguid in (select biaoduanguid from cg_zhaobiaogginfo WHERE auditstatus='3') and (iscancel is null or isCancel not in ('1','2','3')) ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and isnull(ZhaoBiaoBeiAnIsSelected,'0')='0'";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and ZhaoBiaoBeiAnIsSelected='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Multi";
-                TargetUrl = "zfcgztbmis/pages/zbfilereg/ZBMBFile_List?FileType=ZB";
-                break;
-            case bdyichang:
-                // 如果标段异常主表已挑选过此标段，不能重复挑选 modify by zwb 2016-1-25
-                // 如果是现场变更只变更采购方式，可以多次挑选 吕素梅 2016-07-18
-                LimitCondition = "BiaoDuanGuid not in (select BiaoDuanGuid from cg_yichangbdhistory where chuliresault='1') and (iscancel is null or isCancel not in ('1','2','3')) ";
-                LimitCondition += " and biaoduanno IS NOT NULL ";
-                // 加入项目暂停终止的过滤 modify by momo 2011-07-06
-                LimitCondition += " and auditstatus='3' ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    showOkButton = true;
-                }
-                else {
-                    showOkButton = false;
-                }
-                rowCheckerType = "Single";
-                TargetUrl = "zfcgztbmis/pages/liubiaocl/BiaoDuanYiChang_Workflow";
-                break;
-            case zhongbiaogongshi:
-                LimitCondition = " biaoduanguid in (select biaoduanguid from cg_zhaobiaogginfo WHERE auditstatus='3') and kaibiaodate &lt; GETDATE() and (iscancel is null or isCancel not in ('1','2','3')) ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += " and (zhongbiaoisselected='0' or zhongbiaoisselected is null or zhongbiaoisselected='')";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and zhongbiaoisselected='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Multi";
-                TargetUrl = "zfcgztbmis/pages/zhongbiaogongshi/ZhongBiaoGS_Workflow";
-                break;
-            case zhongbiaotzs:
-                LimitCondition = "(gonggaoisselected='1' OR IsConfirmZhongBiaoDW='1') and biaoduanguid in (select biaoduanguid from View_CG_ZhongBiaoGS where auditstatus = '3') and (iscancel is null or isCancel not in ('1','2','3'))";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += "  and ( Zbjieguoisselected='0'  or Zbjieguoisselected is null or Zbjieguoisselected='')";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and Zbjieguoisselected = '1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Single";
-                TargetUrl = "zfcgztbmis/pages/zhongbiaotzs/ZhongBiaoTZS_Workflow";
-                break;
-            case zhaobiaorenpw:
-                LimitCondition = "zhaobiaofangshi NOT IN ('1','2','3') and (iscancel is null or isCancel not in ('1','2','3')) ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += "  and (ZbPingWeiIsSelected !='1' OR ZbPingWeiIsSelected is null )";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and ZbPingWeiIsSelected ='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Multi";
-                TargetUrl = "zfcgztbmis/pages/zhaobiaorenpw/ZhaoBiaoRenPW_Workflow";
-                break;
-            case hetong:
-                LimitCondition = "zhaobiaofangshi NOT IN ('1','2','3') AND (zhongbiaoisselected='1' OR isconfirmzhongbiaodw='1') and (iscancel is null or isCancel not in ('1','2','3')) ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += "  and isnull(HeTongIsSelected,'0')='0'";
-                    showOkButton = true;
-                }
-                else {
-                    LimitCondition += " and HeTongIsSelected='1'";
-                    showOkButton = false;
-                }
-                rowCheckerType = "Single";
-                TargetUrl = "zfcgztbmis/pages/hetongba/HeTongBA_Workflow";
-                break;
-            case smreport:
-                LimitCondition = "zhaobiaofangshi IN ('公','竞','邀','询') AND (zhongbiaoisselected='1' or IsConfirmZhongBiaoDW='1') And (iscancel is null or isCancel not in ('1','2','3')) ";
-                if ("0".equals(drpStstus)) {// 未发布过
-                    LimitCondition += "  and (baogaodanisselected is null or baogaodanisselected='' or baogaodanisselected ='0')";
-                }
-                else {
-                    LimitCondition += " and baogaodanisselected ='1'";
-                }
-                showOkButton = true;
-                rowCheckerType = "Single";
-                TargetUrl = "";
-                break;
-            case bdcancel:
-                LimitCondition = " (iscancel is null or isCancel not in ('1','2','3'))";
-                showOkButton = true;
-                rowCheckerType = "Single";
-                TargetUrl = "zfcgztbmis/pages/projectcancel/BiaoDuanCancel_Workflow";
-                break;
-            default:
-                break;
-        }
-
-        addViewData("TargetUrl", TargetUrl);
-        return strCondition;
     }
 </pre></div>
-                </td>
-            </tr><tr>
-        </tr>
-        </table>
-    </td></tr>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
 </table>
 <br>
 <table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
-    <tr><td style="background-color:white">
-        <p style="font-size:14pt"><b>Class 4:</b> &nbsp; 4 fragments, nominal size 43 lines, similarity 78%</p>
-        <table cellpadding=4 border=2>
-            <tr>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag28')" href="javascript:;">
-                        source/src/main/java/com/epoint/zfcgztbmis/fabaoreg/action/ZfcgBiaoDuanForListAction.java: 267-319
-                    </a>
-                    <div class="mid" id="frag28" style="display:none"><pre>
-    public String respon() {
-        TargetUrl = getViewData("TargetUrl");
-        String row_id = "";
-        String msg = "";
-        if (getDataModel().getSelectKeys() == null || getDataModel().getSelectKeys().size() == 0)
-            return "{\"status\":false,\"msg\":\"请选择需要操作的分包\"}";
-
-
-        for (String rowid : getDataModel().getSelectKeys()) {
-            row_id += rowid + ",";
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 42:</b> &nbsp; 2 fragments, nominal size 23 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag141')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 104-128
+</a>
+<div class="mid" id="frag141" style="display:none"><pre>
+    public boolean offer(T task, long timeout, TimeUnit timeUnit) {
+        lock.lock();
+        try {
+            long nanos = timeUnit.toNanos(timeout);
+            while (queue.size() == capcity) {
+                try {
+                    if (nanos &lt;= 0) {
+                        return false;
+                    }
+                    log.debug("等待加入任务队列 {} ...", task);
+                    nanos = fullWaitSet.awaitNanos(nanos);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            log.debug("加入任务队列 {}", task);
+            queue.addLast(task);
+            emptyWaitSet.signal();
+            return true;
         }
+        finally {
+            lock.unlock();
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag359')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 104-128
+</a>
+<div class="mid" id="frag359" style="display:none"><pre>
+    public boolean offer(T task, long timeout, TimeUnit timeUnit) {
+        lock.lock();
+        try {
+            long nanos = timeUnit.toNanos(timeout);
+            while (queue.size() == capcity) {
+                try {
+                    if (nanos &lt;= 0) {
+                        return false;
+                    }
+                    log.debug("等待加入任务队列 {} ...", task);
+                    nanos = fullWaitSet.awaitNanos(nanos);
+                }
+                catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            log.debug("加入任务队列 {}", task);
+            queue.addLast(task);
+            emptyWaitSet.signal();
+            return true;
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 43:</b> &nbsp; 2 fragments, nominal size 14 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag143')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 140-156
+</a>
+<div class="mid" id="frag143" style="display:none"><pre>
+    public void tryPut(RejectPolicy&lt;T&gt; rejectPolicy, T task) {
+        lock.lock();
+        try {
+            // 判断队列是否满
+            if (queue.size() == capcity) {
+                rejectPolicy.reject(this, task);
+            }
+            else {  // 有空闲
+                log.debug("加入任务队列 {}", task);
+                queue.addLast(task);
+                emptyWaitSet.signal();
+            }
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag361')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch01/BlockingQueue.java: 140-156
+</a>
+<div class="mid" id="frag361" style="display:none"><pre>
+    public void tryPut(RejectPolicy&lt;T&gt; rejectPolicy, T task) {
+        lock.lock();
+        try {
+            // 判断队列是否满
+            if (queue.size() == capcity) {
+                rejectPolicy.reject(this, task);
+            }
+            else {  // 有空闲
+                log.debug("加入任务队列 {}", task);
+                queue.addLast(task);
+                emptyWaitSet.signal();
+            }
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 44:</b> &nbsp; 2 fragments, nominal size 17 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag144')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch01/TestThreadPool.java: 10-35
+</a>
+<div class="mid" id="frag144" style="display:none"><pre>
+    public static void main(String[] args) {
+        ThreadPool threadPool = new ThreadPool(1,
+                1000, TimeUnit.MILLISECONDS, 1, (queue, task)-&gt;{
+            // 1. 死等
+//            queue.put(task);
+            // 2) 带超时等待
+//            queue.offer(task, 1500, TimeUnit.MILLISECONDS);
+            // 3) 让调用者放弃任务执行
+//            log.debug("放弃{}", task);
+            // 4) 让调用者抛出异常
+//            throw new RuntimeException("任务执行失败 " + task);
+            // 5) 让调用者自己执行任务
+            task.run();
+        });
+        for (int i = 0; i &lt; 4; i++) {
+            int j = i;
+            threadPool.execute(() -&gt; {
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                log.debug("{}", j);
+            });
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag362')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch01/TestThreadPool.java: 10-35
+</a>
+<div class="mid" id="frag362" style="display:none"><pre>
+    public static void main(String[] args) {
+        ThreadPool threadPool = new ThreadPool(1,
+                1000, TimeUnit.MILLISECONDS, 1, (queue, task)-&gt;{
+            // 1. 死等
+//            queue.put(task);
+            // 2) 带超时等待
+//            queue.offer(task, 1500, TimeUnit.MILLISECONDS);
+            // 3) 让调用者放弃任务执行
+//            log.debug("放弃{}", task);
+            // 4) 让调用者抛出异常
+//            throw new RuntimeException("任务执行失败 " + task);
+            // 5) 让调用者自己执行任务
+            task.run();
+        });
+        for (int i = 0; i &lt; 4; i++) {
+            int j = i;
+            threadPool.execute(() -&gt; {
+                try {
+                    Thread.sleep(1000L);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                log.debug("{}", j);
+            });
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 45:</b> &nbsp; 2 fragments, nominal size 12 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag145')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch01/TestThreadPool.java: 57-76
+</a>
+<div class="mid" id="frag145" style="display:none"><pre>
+    public void execute(Runnable task) {
+        // 当任务数没有超过 coreSize 时，直接交给 worker 对象执行
+        // 如果任务数超过 coreSize 时，加入任务队列暂存
+        synchronized (workers) {
+            if(workers.size() &lt; coreSize) {
+                Worker worker = new Worker(task);
+                log.debug("新增 worker{}, {}", worker, task);
+                workers.add(worker);
+                worker.start();
+            } else {
+//                taskQueue.put(task);
+                // 1) 死等
+                // 2) 带超时等待
+                // 3) 让调用者放弃任务执行
+                // 4) 让调用者抛出异常
+                // 5) 让调用者自己执行任务
+                taskQueue.tryPut(rejectPolicy, task);
+            }
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag363')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch01/TestThreadPool.java: 57-76
+</a>
+<div class="mid" id="frag363" style="display:none"><pre>
+    public void execute(Runnable task) {
+        // 当任务数没有超过 coreSize 时，直接交给 worker 对象执行
+        // 如果任务数超过 coreSize 时，加入任务队列暂存
+        synchronized (workers) {
+            if(workers.size() &lt; coreSize) {
+                Worker worker = new Worker(task);
+                log.debug("新增 worker{}, {}", worker, task);
+                workers.add(worker);
+                worker.start();
+            } else {
+//                taskQueue.put(task);
+                // 1) 死等
+                // 2) 带超时等待
+                // 3) 让调用者放弃任务执行
+                // 4) 让调用者抛出异常
+                // 5) 让调用者自己执行任务
+                taskQueue.tryPut(rejectPolicy, task);
+            }
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 46:</b> &nbsp; 2 fragments, nominal size 16 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag148')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch01/TestThreadPool.java: 95-114
+</a>
+<div class="mid" id="frag148" style="display:none"><pre>
+        public void run() {
+            // 执行任务
+            // 1) 当 task 不为空，执行任务
+            // 2) 当 task 执行完毕，再接着从任务队列获取任务并执行
+//            while(task != null || (task = taskQueue.take()) != null) {
+            while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
+                try {
+                    log.debug("正在执行...{}", task);
+                    task.run();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    task = null;
+                }
+            }
+            synchronized (workers) {
+                log.debug("worker 被移除{}", this);
+                workers.remove(this);
+            }
+        }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag366')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch01/TestThreadPool.java: 95-114
+</a>
+<div class="mid" id="frag366" style="display:none"><pre>
+        public void run() {
+            // 执行任务
+            // 1) 当 task 不为空，执行任务
+            // 2) 当 task 执行完毕，再接着从任务队列获取任务并执行
+//            while(task != null || (task = taskQueue.take()) != null) {
+            while(task != null || (task = taskQueue.poll(timeout, timeUnit)) != null) {
+                try {
+                    log.debug("正在执行...{}", task);
+                    task.run();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    task = null;
+                }
+            }
+            synchronized (workers) {
+                log.debug("worker 被移除{}", this);
+                workers.remove(this);
+            }
+        }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 47:</b> &nbsp; 4 fragments, nominal size 27 lines, similarity 92%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag151')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch02/TestDeadLock.java: 27-57
+</a>
+<div class="mid" id="frag151" style="display:none"><pre>
+    private static void test2() {
+        ExecutorService waiterPool = Executors.newFixedThreadPool(1);
+        ExecutorService cookPool = Executors.newFixedThreadPool(1);
 
-        row_id = Functions.TrimEnd(row_id, ",");
-        String strUrl="";
-        if(TargetUrl.indexOf("?")&lt;0){
-            strUrl = "?SelectRowID=" + row_id;
+        waiterPool.execute(() -&gt; {
+            log.debug("处理点餐...");
+            Future&lt;String&gt; f = cookPool.submit(() -&gt; {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+        waiterPool.execute(() -&gt; {
+            log.debug("处理点餐...");
+            Future&lt;String&gt; f = cookPool.submit(() -&gt; {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag370')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch02/TestDeadLock.java: 59-88
+</a>
+<div class="mid" id="frag370" style="display:none"><pre>
+    public void test1() {
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        executorService.execute(() -&gt; {
+            log.debug("处理点餐...");
+            Future&lt;String&gt; f = executorService.submit(() -&gt; {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -&gt; {
+            log.debug("处理点餐...");
+            Future&lt;String&gt; f = executorService.submit(() -&gt; {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag369')" href="javascript:;">
+target/src/main/java/me/ezerror/mutilthreading/D4/Ch02/TestDeadLock.java: 27-57
+</a>
+<div class="mid" id="frag369" style="display:none"><pre>
+    private static void test2() {
+        ExecutorService waiterPool = Executors.newFixedThreadPool(1);
+        ExecutorService cookPool = Executors.newFixedThreadPool(1);
+
+        waiterPool.execute(() -&gt; {
+            log.debug("处理点餐...");
+            Future&lt;String&gt; f = cookPool.submit(() -&gt; {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+        waiterPool.execute(() -&gt; {
+            log.debug("处理点餐...");
+            Future&lt;String&gt; f = cookPool.submit(() -&gt; {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag152')" href="javascript:;">
+source/src/main/java/me/ezerror/mutilthreading/D4/Ch02/TestDeadLock.java: 59-88
+</a>
+<div class="mid" id="frag152" style="display:none"><pre>
+    public void test1() {
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        executorService.execute(() -&gt; {
+            log.debug("处理点餐...");
+            Future&lt;String&gt; f = executorService.submit(() -&gt; {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+        executorService.execute(() -&gt; {
+            log.debug("处理点餐...");
+            Future&lt;String&gt; f = executorService.submit(() -&gt; {
+                log.debug("做菜");
+                return cooking();
+            });
+            try {
+                log.debug("上菜: {}", f.get());
+            }
+            catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 48:</b> &nbsp; 8 fragments, nominal size 12 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag156')" href="javascript:;">
+source/src/main/java/me/ezerror/test/exception/LoginService.java: 15-27
+</a>
+<div class="mid" id="frag156" style="display:none"><pre>
+    public void login() throws LoginException {
+        System.out.print("请输入用户名：");
+        Scanner sc=new Scanner(System.in);
+        String username = sc.next();
+        System.out.print("请输入密码：");
+        String password = sc.next();
+
+        if(!(usernameAndPwd.containsKey(username)&amp;&amp;usernameAndPwd.get(username).equals(password))){
+            throw new LoginException();
         }else{
-            strUrl = "&amp;SelectRowID=" + row_id;
+            System.out.println("登录成功");
         }
-
-        if (!"".equals(CanShu)) {
-            strUrl += "&amp;" + CanShu;
-        }
-
-        if (StringUtil.isNotBlank(type) &amp;&amp; "ZBFileZhiZuo".equals(type)) {
-            String sql = "select IsUseWebZtb from VIEW_CG_BIAODUAN where row_id in(" + row_id + ")";
-            String StrIsUseWebZtb = service.queryString(sql);
-            if ("0".equals(StrIsUseWebZtb)) {
-                return "{\"status\":false,\"msg\":\"" + "此标段非网上招投标,无法制作招标文件!" + "\"}";
-            }
-        }
-
-        // 根据条件限制弹出不同的提示信息。
-        switch (Integer.parseInt(new DB_JSGC_BiaoDuanInfo().checkSelect(row_id, type))) {
-            case 0:
-                return "{\"status\":true,\"msg\":\"" + "../../../" + getViewData("TargetUrl") + strUrl + "\"}";
-            case 1:
-                msg = "所选择的分包不在同一个项目中，请确认！";
-                break;
-            case 2:
-                msg = "所选择的分包不是同一个招标代理，请确认！";
-                break;
-            case 3:
-                msg = "所选分包必须在同一个地区才能一起预约，请确认！";
-                break;
-            case 4:
-                msg = "所选择的分包不是同一采购方式，请确认！";
-                break;
-            default:
-                break;
-        }
-        return "{\"status\":false,\"msg\":\"" + msg + "\"}";
     }
 </pre></div>
-                </td>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag8198')" href="javascript:;">
-                        target/src/main/java/com/epoint/zfcgztbmis/fabaoreg/action/HYZfcgBiaoDuanForListAction.java: 285-337
-                    </a>
-                    <div class="mid" id="frag8198" style="display:none"><pre>
-    public String respon() {
-        TargetUrl = getViewData("TargetUrl");
-        String row_id = "";
-        String msg = "";
-        if (getDataModel().getSelectKeys() == null || getDataModel().getSelectKeys().size() == 0)
-            return "{\"status\":false,\"msg\":\"请选择需要操作的分包\"}";
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag374')" href="javascript:;">
+target/src/main/java/me/ezerror/test/exception/LoginService.java: 15-27
+</a>
+<div class="mid" id="frag374" style="display:none"><pre>
+    public void login() throws LoginException {
+        System.out.print("请输入用户名：");
+        Scanner sc=new Scanner(System.in);
+        String username = sc.next();
+        System.out.print("请输入密码：");
+        String password = sc.next();
 
-        for (String rowid : getDataModel().getSelectKeys()) {
-            row_id += rowid + ",";
+        if(!(usernameAndPwd.containsKey(username)&amp;&amp;usernameAndPwd.get(username).equals(password))){
+            throw new LoginException();
+        }else{
+            System.out.println("登录成功");
         }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag440')" href="javascript:;">
+target/src/main/java/me/nicadtest/LoginService.java: 17-30
+</a>
+<div class="mid" id="frag440" style="display:none"><pre>
+    public void login() throws LoginException {
+        System.out.print("请输入用户名：");
+        Scanner sc = new Scanner(System.in);
+        String username = sc.next();
+        System.out.print("请输入密码：");
+        String password = sc.next();
 
-        row_id = Functions.TrimEnd(row_id, ",");
-        String strUrl = "";
-        if (TargetUrl.indexOf("?") &lt; 0) {
-            strUrl = "?SelectRowID=" + row_id;
+        if (!(usernameAndPwd.containsKey(username) &amp;&amp; usernameAndPwd.get(username).equals(password))) {
+            throw new LoginException();
         }
         else {
-            strUrl = "&amp;SelectRowID=" + row_id;
+            System.out.println("登录成功");
         }
-
-        if (!"".equals(CanShu)) {
-            strUrl += "&amp;" + CanShu;
-        }
-
-        if (StringUtil.isNotBlank(type) &amp;&amp; "ZBFileZhiZuo".equals(type)) {
-            String sql = "select IsUseWebZtb from VIEW_CG_BIAODUAN where row_id in(" + row_id + ")";
-            String StrIsUseWebZtb = service.queryString(sql);
-            if ("0".equals(StrIsUseWebZtb)) {
-                return "{\"status\":false,\"msg\":\"" + "此标段非网上招投标,无法制作招标文件!" + "\"}";
-            }
-        }
-
-        // 根据条件限制弹出不同的提示信息。
-        switch (Integer.parseInt(new DB_JSGC_BiaoDuanInfo().checkSelect(row_id, type))) {
-            case 0:
-                return "{\"status\":true,\"msg\":\"" + "../../../" + getViewData("TargetUrl") + strUrl + "\"}";
-            case 1:
-                msg = "所选择的分包不在同一个项目中，请确认！";
-                break;
-            case 2:
-                msg = "所选择的分包不是同一个招标代理，请确认！";
-                break;
-            case 3:
-                msg = "所选分包必须在同一个地区才能一起预约，请确认！";
-                break;
-            case 4:
-                msg = "所选择的分包不是同一采购方式，请确认！";
-                break;
-            default:
-                break;
-        }
-        return "{\"status\":false,\"msg\":\"" + msg + "\"}";
     }
 </pre></div>
-                </td>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag8343')" href="javascript:;">
-                        target/src/main/java/com/epoint/zfcgztbmis/pppprozbgs/action/HYPPPBDForSelListAction.java: 151-196
-                    </a>
-                    <div class="mid" id="frag8343" style="display:none"><pre>
-    public String respon() {
-        TargetUrl = getViewData("TargetUrl");
-        String row_id = "";
-        String msg = "";
-        if (getDataModel().getSelectKeys() == null || getDataModel().getSelectKeys().size() == 0) {
-            return "{\"status\":false,\"msg\":\"请挑选分包！\"}";
-        }
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag441')" href="javascript:;">
+target/src/main/java/me/nicadtest/LoginService2.java: 17-30
+</a>
+<div class="mid" id="frag441" style="display:none"><pre>
+    public void login() throws LoginException {
+        System.out.print("请输入用户名：");
+        Scanner sc = new Scanner(System.in);
+        String username = sc.next();
+        System.out.print("请输入密码：");
+        String password = sc.next();
 
-        for (String rowid : getDataModel().getSelectKeys()) {
-            row_id += rowid + ",";
-        }
-
-        row_id = Functions.TrimEnd(row_id, ",");
-        String strUrl = "";
-        if (TargetUrl.indexOf("?") &lt; 0) {
-            strUrl = "?SelectRowID=" + row_id;
+        if (!(usernameAndPwd.containsKey(username) &amp;&amp; usernameAndPwd.get(username).equals(password))) {
+            throw new LoginException();
         }
         else {
-            strUrl = "&amp;SelectRowID=" + row_id;
+            System.out.println("登录成功了");
         }
-
-        if (StringUtil.isNotBlank(CanShu)) {
-            strUrl += "&amp;" + CanShu;
-        }
-
-        // 根据条件限制弹出不同的提示信息。
-        switch (Integer.parseInt(new DB_JSGC_BiaoDuanInfo().checkSelect(row_id, type))) {
-            case 0:
-                return "{\"status\":true,\"msg\":\"" + "../../../" + getViewData("TargetUrl") + strUrl + "\"}";
-            case 1:
-                msg = "所选择的分包不在同一个项目中，请确认！";
-                break;
-            case 2:
-                msg = "所选择的分包不是同一个招标代理，请确认！";
-                break;
-            case 3:
-                msg = "所选分包必须在同一个地区才能一起预约，请确认！";
-                break;
-            case 4:
-                msg = "所选择的分包不是同一采购方式，请确认！";
-                break;
-            default:
-                break;
-        }
-        return "{\"status\":false,\"msg\":\"" + msg + "\"}";
     }
 </pre></div>
-                </td>
-                <td width="auto">
-                    <a onclick="javascript:ShowHide('frag15753')" href="javascript:;">
-                        target/src/main/java/com/epoint/ZHManageMis/changebankno/action/HYBiaoDuanForBzjListAction.java: 78-122
-                    </a>
-                    <div class="mid" id="frag15753" style="display:none"><pre>
-    public String respon() {
-        TargetUrl = "changebankno/ChangeBankNo_Workflow";
-        String row_id = "";
-        String msg = "";
-        if (getDataModel().getSelectKeys().isEmpty())
-            return "{\"status\":false,\"msg\":\"请选择需要操作的标段(包)\"}";
+</td>
+</tr><tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag442')" href="javascript:;">
+target/src/main/java/me/nicadtest/LoginService3.java: 17-30
+</a>
+<div class="mid" id="frag442" style="display:none"><pre>
+    public void login() throws LoginException {
+        System.out.print("请输入用户名：");
+        Scanner sc = new Scanner(System.in);
+        String username = sc.next();
+        System.out.print("请输入密码：");
+        String password = sc.next();
 
-        for (String rowid : getDataModel().getSelectKeys()) {
-            row_id += rowid + ",";
-        }
-
-        row_id = Functions.TrimEnd(row_id, ",");
-        String strUrl = "";
-        if (TargetUrl.indexOf("?") &lt; 0) {
-            strUrl = "?SelectRowID=" + row_id;
+        if (!(usernameAndPwd.containsKey(username) &amp;&amp; usernameAndPwd.get(username).equals(password))) {
+            throw new LoginException();
         }
         else {
-            strUrl = "&amp;SelectRowID=" + row_id;
+            System.out.println("登录成功");
         }
-
-        if (!"".equals(CanShu)) {
-            strUrl += "&amp;" + CanShu;
-        }
-
-        // 根据条件限制弹出不同的提示信息。
-        switch (Integer.parseInt(new DB_JSGC_BiaoDuanInfo().checkSelect(row_id, type))) {
-            case 0:
-                return "{\"status\":true,\"msg\":\"" + "../../../zhmanagemis/pages/" + TargetUrl + strUrl + "\"}";
-            case 1:
-                msg = "所选择的分包不在同一个项目中，请确认！";
-                break;
-            case 2:
-                msg = "所选择的分包不是同一个招标代理，请确认！";
-                break;
-            case 3:
-                msg = "所选分包必须在同一个地区才能一起预约，请确认！";
-                break;
-            case 4:
-                msg = "所选择的分包不是同一采购方式，请确认！";
-                break;
-            default:
-                break;
-        }
-        return "{\"status\":false,\"msg\":\"" + msg + "\"}";
     }
 </pre></div>
-                </td>
-            </tr><tr>
-        </tr>
-        </table>
-    </td></tr>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag222')" href="javascript:;">
+source/src/main/java/me/nicadtest/LoginService.java: 17-30
+</a>
+<div class="mid" id="frag222" style="display:none"><pre>
+    public void login() throws LoginException {
+        System.out.print("请输入用户名：");
+        Scanner sc = new Scanner(System.in);
+        String username = sc.next();
+        System.out.print("请输入密码：");
+        String password = sc.next();
+
+        if (!(usernameAndPwd.containsKey(username) &amp;&amp; usernameAndPwd.get(username).equals(password))) {
+            throw new LoginException();
+        }
+        else {
+            System.out.println("登录成功");
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag224')" href="javascript:;">
+source/src/main/java/me/nicadtest/LoginService3.java: 17-30
+</a>
+<div class="mid" id="frag224" style="display:none"><pre>
+    public void login() throws LoginException {
+        System.out.print("请输入用户名：");
+        Scanner sc = new Scanner(System.in);
+        String username = sc.next();
+        System.out.print("请输入密码：");
+        String password = sc.next();
+
+        if (!(usernameAndPwd.containsKey(username) &amp;&amp; usernameAndPwd.get(username).equals(password))) {
+            throw new LoginException();
+        }
+        else {
+            System.out.println("登录成功");
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag223')" href="javascript:;">
+source/src/main/java/me/nicadtest/LoginService2.java: 17-30
+</a>
+<div class="mid" id="frag223" style="display:none"><pre>
+    public void login() throws LoginException {
+        System.out.print("请输入用户名：");
+        Scanner sc = new Scanner(System.in);
+        String username = sc.next();
+        System.out.print("请输入密码：");
+        String password = sc.next();
+
+        if (!(usernameAndPwd.containsKey(username) &amp;&amp; usernameAndPwd.get(username).equals(password))) {
+            throw new LoginException();
+        }
+        else {
+            System.out.println("登录成功了");
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
 </table>
 <br>
-
-<script language="JavaScript">
-    function ShowHide(divId) {
-        if(document.getElementById(divId).style.display == 'none') {
-            document.getElementById(divId).style.display='block';
-        } else {
-            document.getElementById(divId).style.display = 'none';
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 49:</b> &nbsp; 2 fragments, nominal size 11 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag165')" href="javascript:;">
+source/src/main/java/me/ezerror/util/DateUtil.java: 95-106
+</a>
+<div class="mid" id="frag165" style="display:none"><pre>
+    public static Object parseDateToString(Date date, String... formatModes) {
+        if (formatModes.length &gt; 1) {
+            List&lt;String&gt; timeList = new ArrayList&lt;&gt;();
+            for (String formatMode : formatModes) {
+                timeList.add(parseDateToString(date, formatMode));
+            }
+            return timeList;
+        }
+        else {
+            return parseDateToString(date, formatModes.length == 1 ? formatModes[0] : DATE_FORMAT);
         }
     }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag383')" href="javascript:;">
+target/src/main/java/me/ezerror/util/DateUtil.java: 95-106
+</a>
+<div class="mid" id="frag383" style="display:none"><pre>
+    public static Object parseDateToString(Date date, String... formatModes) {
+        if (formatModes.length &gt; 1) {
+            List&lt;String&gt; timeList = new ArrayList&lt;&gt;();
+            for (String formatMode : formatModes) {
+                timeList.add(parseDateToString(date, formatMode));
+            }
+            return timeList;
+        }
+        else {
+            return parseDateToString(date, formatModes.length == 1 ? formatModes[0] : DATE_FORMAT);
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 50:</b> &nbsp; 2 fragments, nominal size 14 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag166')" href="javascript:;">
+source/src/main/java/me/ezerror/util/DateUtil.java: 108-123
+</a>
+<div class="mid" id="frag166" style="display:none"><pre>
+    private static String parseDateToString(Date date, String format) {
+        if (date == null) {
+            return "";
+        }
+        else {
+            SimpleDateFormat formatter;
+            try {
+                formatter = new SimpleDateFormat(format);
+                return formatter.format(date);
+            }
+            catch (Exception e) {
+                formatter = new SimpleDateFormat(DATE_FORMAT);
+                return formatter.format(date);
+            }
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag384')" href="javascript:;">
+target/src/main/java/me/ezerror/util/DateUtil.java: 108-123
+</a>
+<div class="mid" id="frag384" style="display:none"><pre>
+    private static String parseDateToString(Date date, String format) {
+        if (date == null) {
+            return "";
+        }
+        else {
+            SimpleDateFormat formatter;
+            try {
+                formatter = new SimpleDateFormat(format);
+                return formatter.format(date);
+            }
+            catch (Exception e) {
+                formatter = new SimpleDateFormat(DATE_FORMAT);
+                return formatter.format(date);
+            }
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 51:</b> &nbsp; 2 fragments, nominal size 41 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag173')" href="javascript:;">
+source/src/main/java/me/ezerror/util/simpleclasslayout/SimpleClassLayout.java: 52-98
+</a>
+<div class="mid" id="frag173" style="display:none"><pre>
+    public String toPrintSimple(Object instance, Boolean isMoreInf) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        String MSG_GAP = "(alignment/padding gap)";
+        String MSG_NEXT_GAP = "(loss due to the next object alignment)";
+        int maxTypeLen = "TYPE".length();
+        for (FieldLayout f : fields()) {
+            maxTypeLen = Math.max(f.typeClass().length(), maxTypeLen);
+        }
+        maxTypeLen += 2;
+
+        int maxDescrLen = Math.max(MSG_GAP.length(), MSG_NEXT_GAP.length());
+        for (FieldLayout f : fields()) {
+            maxDescrLen = Math.max(f.shortFieldName().length(), maxDescrLen);
+        }
+        maxDescrLen += 2;
+        if (instance != null) {
+            VirtualMachine vm = VM.current();
+            if (isMoreInf) {
+                pw.print("\n64位Mark Word信息: ");
+            }
+            String lockSign = "";
+            for (long off = 4; off &gt;= 0; off -= 4) {
+                int word = vm.getInt(instance, off);
+                pw.printf(toBinary((word &gt;&gt; 24) &amp; 0xFF) + " " +
+                        toBinary((word &gt;&gt; 16) &amp; 0xFF) + " " +
+                        toBinary((word &gt;&gt; 8) &amp; 0xFF) + " " +
+                        toBinary((word &gt;&gt; 0) &amp; 0xFF) + " "
+                );
+                if (off == 0) {
+                    String last8 = toBinary((word &gt;&gt; 0) &amp; 0xFF);
+                    lockSign = last8.substring(last8.length() - 3);
+                }
+            }
+            if (isMoreInf) {
+                pw.print("\n锁标识位为: " + lockSign);
+                String lockName = getLockName(lockSign);
+                pw.print("\n锁状态为: " + lockName);
+            }
+        }
+        else {
+            pw.printf(" %6d %5d %" + maxTypeLen + "s %-" + maxDescrLen + "s %s%n", 0, headerSize(), "", "(object header)", "N/A");
+        }
+        pw.close();
+
+        return sw.toString();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag391')" href="javascript:;">
+target/src/main/java/me/ezerror/util/simpleclasslayout/SimpleClassLayout.java: 52-98
+</a>
+<div class="mid" id="frag391" style="display:none"><pre>
+    public String toPrintSimple(Object instance, Boolean isMoreInf) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        String MSG_GAP = "(alignment/padding gap)";
+        String MSG_NEXT_GAP = "(loss due to the next object alignment)";
+        int maxTypeLen = "TYPE".length();
+        for (FieldLayout f : fields()) {
+            maxTypeLen = Math.max(f.typeClass().length(), maxTypeLen);
+        }
+        maxTypeLen += 2;
+
+        int maxDescrLen = Math.max(MSG_GAP.length(), MSG_NEXT_GAP.length());
+        for (FieldLayout f : fields()) {
+            maxDescrLen = Math.max(f.shortFieldName().length(), maxDescrLen);
+        }
+        maxDescrLen += 2;
+        if (instance != null) {
+            VirtualMachine vm = VM.current();
+            if (isMoreInf) {
+                pw.print("\n64位Mark Word信息: ");
+            }
+            String lockSign = "";
+            for (long off = 4; off &gt;= 0; off -= 4) {
+                int word = vm.getInt(instance, off);
+                pw.printf(toBinary((word &gt;&gt; 24) &amp; 0xFF) + " " +
+                        toBinary((word &gt;&gt; 16) &amp; 0xFF) + " " +
+                        toBinary((word &gt;&gt; 8) &amp; 0xFF) + " " +
+                        toBinary((word &gt;&gt; 0) &amp; 0xFF) + " "
+                );
+                if (off == 0) {
+                    String last8 = toBinary((word &gt;&gt; 0) &amp; 0xFF);
+                    lockSign = last8.substring(last8.length() - 3);
+                }
+            }
+            if (isMoreInf) {
+                pw.print("\n锁标识位为: " + lockSign);
+                String lockName = getLockName(lockSign);
+                pw.print("\n锁状态为: " + lockName);
+            }
+        }
+        else {
+            pw.printf(" %6d %5d %" + maxTypeLen + "s %-" + maxDescrLen + "s %s%n", 0, headerSize(), "", "(object header)", "N/A");
+        }
+        pw.close();
+
+        return sw.toString();
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 52:</b> &nbsp; 2 fragments, nominal size 25 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag178')" href="javascript:;">
+source/src/main/java/me/ezerror/util/simpleclasslayout/SimpleLayouter.java: 22-55
+</a>
+<div class="mid" id="frag178" style="display:none"><pre>
+    public SimpleClassLayout layout(ClassData data) {
+        VirtualMachine vm = VM.current();
+
+        if (data.isArray()) {
+            // special case of arrays
+            int base = vm.arrayBaseOffset(data.arrayComponentType());
+            int scale = vm.arrayIndexScale(data.arrayComponentType());
+
+            long instanceSize = MathUtil.align(base + data.arrayLength() * scale, vm.objectAlignment());
+
+            SortedSet&lt;FieldLayout&gt; result = new TreeSet&lt;&gt;();
+            result.add(new FieldLayout(FieldData.create(data.arrayClass(), "&lt;elements&gt;", data.arrayComponentType()), base, scale * data.arrayLength()));
+            return new SimpleClassLayout(data, result, vm.arrayHeaderSize(), instanceSize, false);
+        }
+
+        Collection&lt;FieldData&gt; fields = data.fields();
+
+        SortedSet&lt;FieldLayout&gt; result = new TreeSet&lt;&gt;();
+        for (FieldData f : fields) {
+            result.add(new FieldLayout(f, f.vmOffset(), vm.sizeOfField(f.typeClass())));
+        }
+
+        long instanceSize;
+        if (result.isEmpty()) {
+            instanceSize = vm.objectHeaderSize();
+        }
+        else {
+            FieldLayout f = result.last();
+            instanceSize = f.offset() + f.size();
+            // TODO: This calculation is incorrect if there is a trailing @Contended field, or the instance is @Contended
+        }
+        instanceSize = MathUtil.align(instanceSize, vm.objectAlignment());
+        return new SimpleClassLayout(data, result, vm.objectHeaderSize(), instanceSize, true);
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag396')" href="javascript:;">
+target/src/main/java/me/ezerror/util/simpleclasslayout/SimpleLayouter.java: 22-55
+</a>
+<div class="mid" id="frag396" style="display:none"><pre>
+    public SimpleClassLayout layout(ClassData data) {
+        VirtualMachine vm = VM.current();
+
+        if (data.isArray()) {
+            // special case of arrays
+            int base = vm.arrayBaseOffset(data.arrayComponentType());
+            int scale = vm.arrayIndexScale(data.arrayComponentType());
+
+            long instanceSize = MathUtil.align(base + data.arrayLength() * scale, vm.objectAlignment());
+
+            SortedSet&lt;FieldLayout&gt; result = new TreeSet&lt;&gt;();
+            result.add(new FieldLayout(FieldData.create(data.arrayClass(), "&lt;elements&gt;", data.arrayComponentType()), base, scale * data.arrayLength()));
+            return new SimpleClassLayout(data, result, vm.arrayHeaderSize(), instanceSize, false);
+        }
+
+        Collection&lt;FieldData&gt; fields = data.fields();
+
+        SortedSet&lt;FieldLayout&gt; result = new TreeSet&lt;&gt;();
+        for (FieldData f : fields) {
+            result.add(new FieldLayout(f, f.vmOffset(), vm.sizeOfField(f.typeClass())));
+        }
+
+        long instanceSize;
+        if (result.isEmpty()) {
+            instanceSize = vm.objectHeaderSize();
+        }
+        else {
+            FieldLayout f = result.last();
+            instanceSize = f.offset() + f.size();
+            // TODO: This calculation is incorrect if there is a trailing @Contended field, or the instance is @Contended
+        }
+        instanceSize = MathUtil.align(instanceSize, vm.objectAlignment());
+        return new SimpleClassLayout(data, result, vm.objectHeaderSize(), instanceSize, true);
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 53:</b> &nbsp; 2 fragments, nominal size 68 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag184')" href="javascript:;">
+source/src/main/java/me/ezerror/util/sqlbuilder/SqlBuilder.java: 35-104
+</a>
+<div class="mid" id="frag184" style="display:none"><pre>
+    public String toCompleteSql() {
+        SqlGenerator sql = new SqlGenerator();
+        sql.append("select").append(this.selectField);
+        sql.append("from").append(this.tableName);
+        if (this.joinList != null &amp;&amp; !this.joinList.isEmpty()) {
+            sql.append("a");
+            for (Join join : joinList) {
+                sql.append(join.joinMode);
+                sql.append(join.joinTable);
+                sql.append("on").append(join.columnA).append("=").append(join.columnB);
+            }
+        }
+        if (conditionMap.size() &gt; 0) {
+            SqlGenerator patchSql = new SqlGenerator();
+            patchSql.append("where 1=1");
+            for (Map.Entry&lt;String, SqlCondition&gt; map : conditionMap.entrySet()) {
+                SqlCondition sqlCondition = map.getValue();
+                List&lt;condition&gt; conditionList = sqlCondition.getConditionList();
+                for (int i = 0; i &lt; conditionList.size(); i++) {
+                    if (i == 0) {
+                        patchSql.append(map.getKey()).append("( 1=1");
+                    }
+                    patchSql.append(conditionList.get(i).getPatchSql());
+                    if (i == conditionList.size() - 1) {
+                        patchSql.append(")");
+                    }
+                }
+            }
+            sql.appendNonBlank(patchSql.toString());
+        }
+
+        // 分组
+        SqlGenerator groupBySql = new SqlGenerator();
+        if (!groupByList.isEmpty()) {
+            groupBySql.append("group by");
+            for (int i = 0; i &lt; groupByList.size(); i++) {
+                groupBySql.append(groupByList.get(i));
+                if (i != groupByList.size() - 1) {
+                    groupBySql.append(",");
+                }
+            }
+        }
+        sql.appendNonBlank(groupBySql.toString());
+        // 排序
+        SqlGenerator sortSql = new SqlGenerator();
+        Iterator&lt;Map.Entry&lt;String, String&gt;&gt; sortMapIter = sortMap.entrySet().iterator();
+        boolean isFirst = true;
+        while (sortMapIter.hasNext()) {
+            Map.Entry&lt;String, String&gt; sort = sortMapIter.next();
+            if (isFirst) {
+                sortSql.append("order by");
+                isFirst = false;
+            }
+            if (sortMapIter.hasNext()) {
+                sortSql.append(sort.getKey()).appendNonBlank(sort.getValue()).appendNonBlank(",");
+            }
+            else {
+                sortSql.append(sort.getKey()).append(sort.getValue());
+            }
+        }
+        sql.appendNonBlank(sortSql.toString());
+        sql.append(limit);
+        for (Map.Entry&lt;SqlBuilder, String&gt; unionBuilder : unionMap.entrySet()) {
+            sql.appendLn("");
+            sql.append("UNION").append(unionBuilder.getValue()).appendNonBlank("(");
+            sql.appendNonBlank(unionBuilder.getKey().toCompleteSql());
+            sql.appendNonBlank(")");
+        }
+        return sql.toString();
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag402')" href="javascript:;">
+target/src/main/java/me/ezerror/util/sqlbuilder/SqlBuilder.java: 35-104
+</a>
+<div class="mid" id="frag402" style="display:none"><pre>
+    public String toCompleteSql() {
+        SqlGenerator sql = new SqlGenerator();
+        sql.append("select").append(this.selectField);
+        sql.append("from").append(this.tableName);
+        if (this.joinList != null &amp;&amp; !this.joinList.isEmpty()) {
+            sql.append("a");
+            for (Join join : joinList) {
+                sql.append(join.joinMode);
+                sql.append(join.joinTable);
+                sql.append("on").append(join.columnA).append("=").append(join.columnB);
+            }
+        }
+        if (conditionMap.size() &gt; 0) {
+            SqlGenerator patchSql = new SqlGenerator();
+            patchSql.append("where 1=1");
+            for (Map.Entry&lt;String, SqlCondition&gt; map : conditionMap.entrySet()) {
+                SqlCondition sqlCondition = map.getValue();
+                List&lt;condition&gt; conditionList = sqlCondition.getConditionList();
+                for (int i = 0; i &lt; conditionList.size(); i++) {
+                    if (i == 0) {
+                        patchSql.append(map.getKey()).append("( 1=1");
+                    }
+                    patchSql.append(conditionList.get(i).getPatchSql());
+                    if (i == conditionList.size() - 1) {
+                        patchSql.append(")");
+                    }
+                }
+            }
+            sql.appendNonBlank(patchSql.toString());
+        }
+
+        // 分组
+        SqlGenerator groupBySql = new SqlGenerator();
+        if (!groupByList.isEmpty()) {
+            groupBySql.append("group by");
+            for (int i = 0; i &lt; groupByList.size(); i++) {
+                groupBySql.append(groupByList.get(i));
+                if (i != groupByList.size() - 1) {
+                    groupBySql.append(",");
+                }
+            }
+        }
+        sql.appendNonBlank(groupBySql.toString());
+        // 排序
+        SqlGenerator sortSql = new SqlGenerator();
+        Iterator&lt;Map.Entry&lt;String, String&gt;&gt; sortMapIter = sortMap.entrySet().iterator();
+        boolean isFirst = true;
+        while (sortMapIter.hasNext()) {
+            Map.Entry&lt;String, String&gt; sort = sortMapIter.next();
+            if (isFirst) {
+                sortSql.append("order by");
+                isFirst = false;
+            }
+            if (sortMapIter.hasNext()) {
+                sortSql.append(sort.getKey()).appendNonBlank(sort.getValue()).appendNonBlank(",");
+            }
+            else {
+                sortSql.append(sort.getKey()).append(sort.getValue());
+            }
+        }
+        sql.appendNonBlank(sortSql.toString());
+        sql.append(limit);
+        for (Map.Entry&lt;SqlBuilder, String&gt; unionBuilder : unionMap.entrySet()) {
+            sql.appendLn("");
+            sql.append("UNION").append(unionBuilder.getValue()).appendNonBlank("(");
+            sql.appendNonBlank(unionBuilder.getKey().toCompleteSql());
+            sql.appendNonBlank(")");
+        }
+        return sql.toString();
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 54:</b> &nbsp; 2 fragments, nominal size 12 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag213')" href="javascript:;">
+source/src/main/java/me/ezerror/util/sqlbuilder/SqlCondition.java: 68-79
+</a>
+<div class="mid" id="frag213" style="display:none"><pre>
+        private String parseSqlFiledValue(Object value) {
+            if (value instanceof String) {
+                return value.toString();
+            }
+            if (value instanceof Integer) {
+                return String.valueOf(value);
+            }
+            if (value instanceof Date) {
+                return DateUtil.parseDateToString((Date) value, DateUtil.DATE_TIME_FORMAT).toString();
+            }
+            return value.toString();
+        }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag431')" href="javascript:;">
+target/src/main/java/me/ezerror/util/sqlbuilder/SqlCondition.java: 68-79
+</a>
+<div class="mid" id="frag431" style="display:none"><pre>
+        private String parseSqlFiledValue(Object value) {
+            if (value instanceof String) {
+                return value.toString();
+            }
+            if (value instanceof Integer) {
+                return String.valueOf(value);
+            }
+            if (value instanceof Date) {
+                return DateUtil.parseDateToString((Date) value, DateUtil.DATE_TIME_FORMAT).toString();
+            }
+            return value.toString();
+        }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 55:</b> &nbsp; 4 fragments, nominal size 10 lines, similarity 87%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag214')" href="javascript:;">
+source/src/main/java/me/ezerror/util/sqlbuilder/SqlCondition.java: 81-91
+</a>
+<div class="mid" id="frag214" style="display:none"><pre>
+        public String getPatchSql() {
+            SqlGenerator sql = new SqlGenerator();
+            sql.append(conditionMode).append(field).append(operate);
+            if (operate.equals("in")) {
+                sql.append(value);
+            }
+            else {
+                sql.append("'" + value + "'");
+            }
+            return sql.toString();
+        }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag432')" href="javascript:;">
+target/src/main/java/me/ezerror/util/sqlbuilder/SqlCondition.java: 81-91
+</a>
+<div class="mid" id="frag432" style="display:none"><pre>
+        public String getPatchSql() {
+            SqlGenerator sql = new SqlGenerator();
+            sql.append(conditionMode).append(field).append(operate);
+            if (operate.equals("in")) {
+                sql.append(value);
+            }
+            else {
+                sql.append("'" + value + "'");
+            }
+            return sql.toString();
+        }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag433')" href="javascript:;">
+target/src/main/java/me/ezerror/util/sqlbuilder/SqlCondition.java: 93-103
+</a>
+<div class="mid" id="frag433" style="display:none"><pre>
+        public String getNoConditionModePatchSql() {
+            SqlGenerator sql = new SqlGenerator();
+            sql.append(field).append(operate);
+            if (operate.equals("in")) {
+                sql.append(value);
+            }
+            else {
+                sql.append("'" + value + "'");
+            }
+            return sql.toString();
+        }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag215')" href="javascript:;">
+source/src/main/java/me/ezerror/util/sqlbuilder/SqlCondition.java: 93-103
+</a>
+<div class="mid" id="frag215" style="display:none"><pre>
+        public String getNoConditionModePatchSql() {
+            SqlGenerator sql = new SqlGenerator();
+            sql.append(field).append(operate);
+            if (operate.equals("in")) {
+                sql.append(value);
+            }
+            else {
+                sql.append("'" + value + "'");
+            }
+            return sql.toString();
+        }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<br>
+<table style="width:1000px; border:2px solid lightgrey; border-radius:8px;">
+<tr><td style="background-color:white">
+<p style="font-size:14pt"><b>Class 56:</b> &nbsp; 2 fragments, nominal size 16 lines, similarity 100%</p>
+<table cellpadding=4 border=2>
+<tr>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag220')" href="javascript:;">
+source/src/main/java/me/ezerror/util/TestIpModify.java: 7-26
+</a>
+<div class="mid" id="frag220" style="display:none"><pre>
+    public static void main(String[] args) {
+        try {
+            // Get the first argument as the hostname.
+            if (args.length &gt; 0) {
+                InetAddress[] inetAddresses = InetAddress.getAllByName(args[0]);
+                for (InetAddress ia : inetAddresses) {
+                    System.out.println(ia);
+                }
+            }
+            else {
+                //if No argument, get the localhost ip address.
+                InetAddress localHostAddress = InetAddress.getLocalHost();
+                System.out.println(localHostAddress);
+                System.out.println(localHostAddress);
+            }
+        }
+        catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    }
+</pre></div>
+</td>
+<td width="auto">
+<a onclick="javascript:ShowHide('frag438')" href="javascript:;">
+target/src/main/java/me/ezerror/util/TestIpModify.java: 7-26
+</a>
+<div class="mid" id="frag438" style="display:none"><pre>
+    public static void main(String[] args) {
+        try {
+            // Get the first argument as the hostname.
+            if (args.length &gt; 0) {
+                InetAddress[] inetAddresses = InetAddress.getAllByName(args[0]);
+                for (InetAddress ia : inetAddresses) {
+                    System.out.println(ia);
+                }
+            }
+            else {
+                //if No argument, get the localhost ip address.
+                InetAddress localHostAddress = InetAddress.getLocalHost();
+                System.out.println(localHostAddress);
+                System.out.println(localHostAddress);
+            }
+        }
+        catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    }
+</pre></div>
+</td>
+</tr><tr>
+</tr>
+</table>
+</td></tr>
+</table>
+<script language="JavaScript">
+function ShowHide(divId) { 
+    if(document.getElementById(divId).style.display == 'none') {
+        document.getElementById(divId).style.display='block';
+    } else { 
+        document.getElementById(divId).style.display = 'none';
+    } 
+}
 </script>
 </body>
 </html>
