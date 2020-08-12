@@ -26,13 +26,14 @@ public class TestNiCadParse {
     private final static String footer = "</table>\n<br>";
 
     public static void main(String[] args) throws IOException {
-        formatByJavaPath("test.html", "formattest.html");
-        convertHtmlToCn("formattest.html", "formattest_cn.html");
+        // 汉化
+        convertHtmlToCn("test.html", "test_cn.html");
+        // 格式化
+        formatByJavaPath("test_cn.html", "formattest_cn.html");
     }
 
     private static void formatByJavaPath(String fileName, String outputFileName) throws IOException {
-        String modelHtml = getHtml("template.html");
-        Document document = Jsoup.parse(modelHtml);
+        Document document = Jsoup.parse(getHtml("template.html"));
         Element table = document.select("#table").first();
         HashMap<String, List<sourceToTargetsRelation>> domMap = getSourceToTargetsRelationMap(fileName);
         for (Map.Entry<String, List<sourceToTargetsRelation>> entry : domMap.entrySet()) {
@@ -64,15 +65,52 @@ public class TestNiCadParse {
                 sourceModel = sourceModel.replaceFirst("##tablehtml##", tableHtml.toString());
                 html.append(sourceModel);
             }
-            html.append(footer);
+
+            generateFragments(entry, html);
+
             table.append(html.toString());
         }
         createHtml(outputFileName, document);
+
+        // 生成list页面
+        generateFragmentList(domMap);
+    }
+
+    private static void generateFragmentList(HashMap<String, List<sourceToTargetsRelation>> domMap) throws IOException {
+        Document fragmentsListDoc = Jsoup.parse(getHtml("fragmentlistemplate.html"));
+        Element listTable = fragmentsListDoc.select("#table").first();
+        int no = 1;
+        String trTpl = "<tr>\n" +
+                "         <td>##no##</td>\n" +
+                "         <td><a href=\"##fragmentfilename##.html\">##classname##</a></td>\n" +
+                "         <td>##javapath##\n" +
+                "      </tr>";
+        for (String javaPath : domMap.keySet()) {
+            String tr = trTpl.replaceAll("##no##", Integer.toString(no++))
+                    .replaceAll("##fragmentfilename##", "fragments/" + javaPath.replace("/", "_"))
+                    .replaceAll("##classname##", javaPath.substring(javaPath.lastIndexOf('/') + 1))
+                    .replaceAll("##javapath##", javaPath);
+            listTable.append(tr);
+        }
+        createHtml("fragmentlist.html", fragmentsListDoc);
+    }
+
+    private static void generateFragments(Map.Entry<String, List<sourceToTargetsRelation>> entry, StringBuilder html) throws IOException {
+        Document fragmentTemp = Jsoup.parse(getHtml("fragmenttemplate.html"));
+        Element fragmentTable = fragmentTemp.select("#table").first();
+        fragmentTable.append(html.toString());
+        String fragmentFileName = "fragments/" + entry.getKey().replace("/", "_") + ".html";
+        createHtml(fragmentFileName, fragmentTemp);
     }
 
     private static void createHtml(String outputFileName, Document document) throws IOException {
         String rootPath = TestNiCadParse.class.getResource("/").getFile();
         String path = rootPath + outputFileName;
+        File file = new File(path);
+        File fileParent = file.getParentFile();
+        if (!fileParent.exists()) {
+            fileParent.mkdirs();
+        }
         FileOutputStream fos = new FileOutputStream(path, false);
         OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
         osw.write(document.html());
