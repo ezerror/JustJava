@@ -100,7 +100,7 @@ public class SqlBuilder {
             sql.appendNonBlank(unionBuilder.getKey().toCompleteSql());
             sql.appendNonBlank(")");
         }
-        return sql.toString();
+        return sql.toString().replace("1=1 and", "");
     }
 
     public String toCountSql() {

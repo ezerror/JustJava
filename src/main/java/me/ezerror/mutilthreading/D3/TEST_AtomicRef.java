@@ -2,7 +2,6 @@ package me.ezerror.mutilthreading.D3;
 
 import lombok.Data;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class TEST_AtomicRef {

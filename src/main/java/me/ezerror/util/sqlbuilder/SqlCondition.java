@@ -45,6 +45,11 @@ public class SqlCondition {
         return this;
     }
 
+    public SqlCondition or(String field, String value) {
+        conditionList.add(new condition(field, value, "or"));
+        return this;
+    }
+
     static class condition {
         String conditionMode = "and";
         String field;
