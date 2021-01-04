@@ -52,8 +52,9 @@ public class  _86_Partition_List {
         pre.next = BiggerNodes.next;
         return H.next;
     }
-}
 
+
+}
 class ListNode {
     int val;
     ListNode next;
@@ -65,3 +66,4 @@ class ListNode {
     public ListNode() {
     }
 }
+
