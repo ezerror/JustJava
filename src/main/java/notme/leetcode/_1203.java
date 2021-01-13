@@ -1,4 +1,4 @@
-package notme;
+package notme.leetcode;
 
 import java.util.*;
 
